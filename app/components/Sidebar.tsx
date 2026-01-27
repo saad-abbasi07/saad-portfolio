@@ -71,7 +71,7 @@ const Sidebar = () => {
         <div className="text-center mb-10 w-full">
           <div className="relative w-40 h-40 rounded-full overflow-hidden mx-auto mb-8">
             <Image 
-              src="/images/Mypic.jpg" 
+              src="/images/main_images/profile.jpg" 
               alt="Saad Abbasi" 
               fill
               className="object-cover" 
