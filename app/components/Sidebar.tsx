@@ -60,10 +60,12 @@ const Sidebar = () => {
           }`}
       >
         {isMobile && (
-          <button onClick={() => setIsOpen(false)} className={`absolute top-4 right-4 md:hidden transition-colors ${
-            theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-400 hover:text-black'
-          }`}>
-            <FiX size={24} />
+          <button onClick={() => setIsOpen(false)} className={`absolute top-4 right-4 md:hidden p-2 rounded-lg transition-colors z-50 ${
+            theme === 'dark' 
+              ? 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white' 
+              : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-black'
+          } shadow-md`}>
+            <FiX size={20} />
           </button>
         )}
 
@@ -82,7 +84,7 @@ const Sidebar = () => {
           }`}>
             Saad Abbasi
           </h1>
-          <p className="text-[12px] uppercase tracking-[1px] text-[#2c98f0] font-medium">
+          <p className="text-[12px] uppercase tracking-[1px] text-[#A855F7] font-medium">
             Full-Stack ML Engineer
           </p>
         </div>
@@ -97,8 +99,8 @@ const Sidebar = () => {
                   onClick={() => { setActive(item.id); if (isMobile) setIsOpen(false); }}
                   className={`block text-[12px] uppercase tracking-[1px] font-medium transition-all duration-200 ${
                     active === item.id 
-                    ? 'text-[#2c98f0] font-bold' 
-                    : theme === 'dark' ? 'text-gray-400 hover:text-[#2c98f0]' : 'text-gray-500 hover:text-[#2c98f0]'
+                    ? 'text-[#A855F7] font-bold' 
+                    : theme === 'dark' ? 'text-gray-400 hover:text-[#A855F7]' : 'text-gray-500 hover:text-[#A855F7]'
                   }`}
                 >
                   {item.label}
@@ -138,10 +140,10 @@ const Sidebar = () => {
           <div className={`flex justify-center space-x-4 ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
           }`}>
-            <Link href="#" className="hover:text-[#2c98f0] transition-colors"><FiFacebook size={14}/></Link>
-            <Link href="#" className="hover:text-[#2c98f0] transition-colors"><FiTwitter size={14}/></Link>
-            <Link href="#" className="hover:text-[#2c98f0] transition-colors"><FiInstagram size={14}/></Link>
-            <Link href="#" className="hover:text-[#2c98f0] transition-colors"><FiLinkedin size={14}/></Link>
+            <Link href="#" className="hover:text-[#A855F7] transition-colors"><FiFacebook size={14}/></Link>
+            <Link href="#" className="hover:text-[#A855F7] transition-colors"><FiTwitter size={14}/></Link>
+            <Link href="#" className="hover:text-[#A855F7] transition-colors"><FiInstagram size={14}/></Link>
+            <Link href="#" className="hover:text-[#A855F7] transition-colors"><FiLinkedin size={14}/></Link>
           </div>
         </div>
       </aside>

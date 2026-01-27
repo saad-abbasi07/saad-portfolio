@@ -16,7 +16,7 @@ const ExpertiseCard = ({ icon, title, color }: ExpertiseCardProps) => {
     <div className={`p-8 shadow-lg border-b-4 ${color} text-center ${
       theme === 'dark' ? 'bg-gray-800' : 'bg-white'
     }`}>
-      <div className="text-3xl text-blue-500 flex justify-center mb-6">{icon}</div>
+      <div className="text-3xl text-primary flex justify-center mb-6">{icon}</div>
       <h3 className="text-[13px] font-bold uppercase tracking-wider">{title}</h3>
     </div>
   );

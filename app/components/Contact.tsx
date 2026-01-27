@@ -73,7 +73,7 @@ export default function Contact() {
                 placeholder="Name" 
                 value={formData.name}
                 onChange={handleInputChange}
-                className="p-4 bg-[#f2f3f7] outline-none text-sm focus:ring-2 focus:ring-blue-500" 
+                className="p-4 bg-[#f2f3f7] outline-none text-sm focus:ring-2 focus:ring-primary" 
                 required
               />
               <input 
@@ -82,7 +82,7 @@ export default function Contact() {
                 placeholder="Email" 
                 value={formData.email}
                 onChange={handleInputChange}
-                className="p-4 bg-[#f2f3f7] outline-none text-sm focus:ring-2 focus:ring-blue-500" 
+                className="p-4 bg-[#f2f3f7] outline-none text-sm focus:ring-2 focus:ring-primary" 
                 required
               />
               <textarea 
@@ -91,13 +91,13 @@ export default function Contact() {
                 rows={5} 
                 value={formData.message}
                 onChange={handleInputChange}
-                className="md:col-span-2 p-4 bg-[#f2f3f7] outline-none text-sm focus:ring-2 focus:ring-blue-500"
+                className="md:col-span-2 p-4 bg-[#f2f3f7] outline-none text-sm focus:ring-2 focus:ring-primary"
                 required
               ></textarea>
               <button 
                 type="submit"
                 disabled={formStatus === 'loading'}
-                className="bg-blue-600 text-white px-10 py-4 uppercase font-bold text-[11px] tracking-widest self-start disabled:bg-gray-400 hover:bg-blue-700 transition-all"
+                className="bg-primary text-primary-foreground px-10 py-4 uppercase font-bold text-[11px] tracking-widest self-start disabled:bg-gray-400 hover:bg-primary/90 transition-all"
               >
                 {formStatus === 'loading' ? 'Sending...' : 'Send Message'}
               </button>

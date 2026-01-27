@@ -38,20 +38,20 @@ export default function Hero({ slides }: HeroProps) {
             <div className={`max-w-2xl z-30 p-6 md:p-0 rounded-lg ${
             theme === 'dark' ? 'bg-gray-800/70 md:bg-transparent' : 'bg-white/70 md:bg-transparent'
           }`}>
-              <h2 className="text-blue-500 font-bold tracking-[6px] uppercase text-[11px] mb-4">{slide.highlight}</h2>
+              <h2 className="text-primary font-bold tracking-[2px] text-[11px] sm:text-[12px] mb-4 font-sans">{slide.highlight}</h2>
               <h1 className={`text-[35px] sm:text-[60px] lg:text-[80px] font-serif font-bold leading-[1.1] mb-6 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2c2c2c]'
               }`}>
-                {slide.title} <br /> <span className="text-blue-600">{slide.subtitle}</span>
+                {slide.title} <br /> <span className="text-primary">{slide.subtitle}</span>
               </h1>
-              <p className={`text-[14px] md:text-[15px] leading-relaxed mb-8 border-l-4 border-blue-500 pl-4 max-w-md ${
+              <p className={`text-[14px] md:text-[15px] leading-relaxed mb-8 border-l-4 border-primary pl-4 max-w-md ${
                 theme === 'dark' ? 'text-gray-300' : 'text-gray-500'
               }`}>{slide.description}</p>
               <button 
                 className={`px-10 py-4 uppercase tracking-widest text-[11px] font-bold transition-all shadow-lg ${
                   theme === 'dark' 
-                    ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                    : 'bg-black text-white hover:bg-blue-600'
+                    ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                    : 'bg-primary text-primary-foreground hover:bg-primary/90'
                 }`}
                 onClick={() => {
                   if (slide.buttonText === "Download CV") {

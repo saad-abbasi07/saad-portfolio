@@ -19,10 +19,23 @@ export default function ProjectCard({ project, color }: ProjectCardProps) {
   const isBlue = color === "blue";
   const { theme } = useTheme();
   return (
-    <div className={`rounded-xl shadow-lg overflow-hidden flex flex-col h-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group min-h-[400px] ${
+    <div className={`rounded-xl shadow-lg overflow-hidden flex flex-col h-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group min-h-[400px] relative ${
       theme === 'dark' ? 'bg-gray-800' : 'bg-white'
     }`}>
-      <div className="relative h-48 w-full shrink-0 overflow-hidden">
+      {/* Attractive border gradient */}
+      <div className={`absolute inset-0 rounded-xl p-[2px] bg-gradient-to-br ${
+        isBlue 
+          ? 'from-[#A855F7] via-purple-500 to-[#A855F7]/60' 
+          : 'from-emerald-400 via-emerald-500 to-emerald-600'
+      } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+        <div className={`w-full h-full rounded-xl ${
+          theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+        }`}></div>
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10 flex flex-col h-full">
+        <div className="relative h-48 w-full shrink-0 overflow-hidden">
         <Image 
           src={project.image} 
           alt={project.title} 
@@ -44,8 +57,8 @@ export default function ProjectCard({ project, color }: ProjectCardProps) {
             {project.technologies.map((tech: string, idx: number) => (
               <span key={idx} className={`text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-1 rounded uppercase tracking-wider ${
                 isBlue 
-                  ? theme === 'dark' ? 'bg-blue-900 text-blue-300' : 'bg-blue-50 text-blue-700'
-                  : theme === 'dark' ? 'bg-green-900 text-green-300' : 'bg-green-50 text-green-700'
+                  ? theme === 'dark' ? 'bg-[#A855F7]/20 text-[#A855F7]' : 'bg-[#A855F7]/10 text-[#A855F7]'
+                  : theme === 'dark' ? 'bg-emerald-900/50 text-emerald-300' : 'bg-emerald-50 text-emerald-700'
               }`}>
                 {tech}
               </span>
@@ -57,8 +70,8 @@ export default function ProjectCard({ project, color }: ProjectCardProps) {
             rel="noopener noreferrer"
             className={`inline-flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors ${
               isBlue 
-                ? theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-800'
-                : theme === 'dark' ? 'text-green-400 hover:text-green-300' : 'text-green-600 hover:text-green-800'
+                ? 'text-[#A855F7] hover:text-[#A855F7]/80'
+                : theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-800'
             }`}
           >
             <FiGithub className="text-sm sm:text-lg" />
@@ -66,6 +79,7 @@ export default function ProjectCard({ project, color }: ProjectCardProps) {
             <span className="sm:hidden">Github</span>
           </a>
         </div>
+      </div>
       </div>
     </div>
   );

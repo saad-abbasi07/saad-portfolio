@@ -13,7 +13,7 @@ export default function StatCard({ count, label }: StatCardProps) {
         ? 'bg-gray-800 hover:bg-gray-700' 
         : 'bg-[#f2f3f7] hover:bg-white'
     } hover:shadow-xl`}>
-      <h3 className="text-2xl font-serif font-bold text-blue-600 mb-1">{count}</h3>
+      <h3 className="text-2xl font-serif font-bold text-primary mb-1">{count}</h3>
       <p className={`text-[10px] uppercase tracking-widest font-bold ${
         theme === 'dark' ? 'text-gray-400' : 'text-gray-400'
       }`}>{label}</p>

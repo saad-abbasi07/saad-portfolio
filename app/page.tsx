@@ -77,7 +77,7 @@ const slides = [
     highlight: "Machine Learning Developer",
     description: "I'm a Full Stack Developer and Machine Learning Developer. I build responsive digital products and use data to create smart solutions.",
     buttonText: "View Certification",
-    image: "/images/main_images/Mypic2.jpg",
+    image: "/images/main_images/Mypic_2.jpg",
   }
 ];
 
@@ -309,20 +309,20 @@ export default function Page() {
               <div className={`max-w-2xl z-30 p-6 md:p-0 rounded-lg ${
                 theme === 'dark' ? 'bg-gray-800/70 md:bg-transparent' : 'bg-white/70 md:bg-transparent'
               }`}>
-                <h2 className="text-blue-500 font-bold tracking-[6px] uppercase text-[11px] mb-4">{slide.highlight}</h2>
+                <h2 className="text-[#A855F7] font-bold tracking-[2px] text-[11px] mb-4">{slide.highlight}</h2>
                 <h1 className={`text-[35px] sm:text-[60px] lg:text-[80px] font-serif font-bold leading-[1.1] mb-6 ${
-                  theme === 'dark' ? 'text-white' : 'text-[#2c2c2c]'
+                  theme === 'dark' ? 'text-white' : 'text-[#A855F7]'
                 }`}>
-                  {slide.title} <br /> <span className="text-blue-600">{slide.subtitle}</span>
+                  {slide.title} <br /> <span className="text-[#A855F7]">{slide.subtitle}</span>
                 </h1>
-                <p className={`text-[14px] md:text-[15px] leading-relaxed mb-8 border-l-4 border-blue-500 pl-4 max-w-md ${
+                <p className={`text-[14px] md:text-[15px] leading-relaxed mb-8 border-l-4 border-[#A855F7] pl-4 max-w-md ${
                   theme === 'dark' ? 'text-gray-300' : 'text-gray-500'
                 }`}>{slide.description}</p>
                 <button 
                   className={`px-10 py-4 uppercase tracking-widest text-[11px] font-bold transition-all shadow-lg ${
                     theme === 'dark' 
-                      ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                      : 'bg-black text-white hover:bg-blue-600'
+                      ? 'bg-[#A855F7] text-white hover:bg-[#A855F7]/90' 
+                      : 'bg-[#A855F7] text-white hover:bg-[#A855F7]/90'
                   }`}
                   onClick={() => {
                     if (slide.buttonText === "Download CV") {
@@ -423,9 +423,9 @@ export default function Page() {
       }`}>
         <div className="max-w-6xl">
           <SectionHeader subtitle="Knowledge" title="Education" />
-          <div className="border-l-2 border-blue-500 ml-4 pl-8 space-y-12">
+          <div className="border-l-2 border-[#A855F7] ml-4 pl-8 space-y-12">
             <TimelineItem 
-              icon={<FiBookOpen className="bg-blue-600 text-white"/>} 
+              icon={<FiBookOpen className="bg-[#A855F7] text-white"/>} 
               date="2022 - 2026" 
               title="Bachelor of Computer Science" 
               sub="Abbottabad University Of Science & Technology (AUST)" 
@@ -444,10 +444,10 @@ export default function Page() {
           <div className="border-l-2 border-red-500 ml-4 pl-8 space-y-12">
             <TimelineItem 
               icon={<FiBriefcase className="bg-red-500 text-white"/>} 
-              date="2025 - Present" 
-              title="Full Stack Web Developer" 
-              sub="Nexelix, Havelian" 
-              desc="Building responsive applications using Next.js, React, and Tailwind CSS. Developing backend APIs and managing MongoDB databases." 
+              date="January 2025 - January 12, 2026" 
+              title="Full Stack Web Developer"
+              sub="Nexelix Solutions, Havelian" 
+              desc="Developed responsive web applications using Next.js, React, and Tailwind CSS. Built RESTful APIs, managed MongoDB databases, and implemented modern web development best practices." 
             />
             <TimelineItem 
               icon={<FiBriefcase className="bg-gray-800 text-white"/>} 
@@ -503,7 +503,7 @@ export default function Page() {
                   placeholder="Name" 
                   value={formData.name}
                   onChange={handleInputChange}
-                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-blue-500 ${
+                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] ${
                     theme === 'dark' 
                       ? 'bg-gray-800 text-white border-gray-600' 
                       : 'bg-[#f2f3f7] text-black'
@@ -516,7 +516,7 @@ export default function Page() {
                   placeholder="Email" 
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-blue-500 ${
+                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] ${
                     theme === 'dark' 
                       ? 'bg-gray-800 text-white border-gray-600' 
                       : 'bg-[#f2f3f7] text-black'
@@ -529,7 +529,7 @@ export default function Page() {
                   rows={5} 
                   value={formData.message}
                   onChange={handleInputChange}
-                  className={`md:col-span-2 p-4 outline-none text-sm focus:ring-2 focus:ring-blue-500 ${
+                  className={`md:col-span-2 p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] ${
                     theme === 'dark' 
                       ? 'bg-gray-800 text-white border-gray-600' 
                       : 'bg-[#f2f3f7] text-black'
@@ -539,7 +539,7 @@ export default function Page() {
                 <button 
                   type="submit"
                   disabled={formStatus === 'loading'}
-                  className="bg-blue-600 text-white px-10 py-4 uppercase font-bold text-[11px] tracking-widest self-start disabled:bg-gray-400 hover:bg-blue-700 transition-all"
+                  className="bg-[#A855F7] text-white px-10 py-4 uppercase font-bold text-[11px] tracking-widest self-start disabled:bg-gray-400 hover:bg-[#A855F7]/90 transition-all"
                 >
                   {formStatus === 'loading' ? 'Sending...' : 'Send Message'}
                 </button>
@@ -571,7 +571,7 @@ const ExpertiseCard = ({ icon, title, color }: ExpertiseCardProps) => {
     <div className={`p-8 shadow-lg border-b-4 ${color} text-center ${
       theme === 'dark' ? 'bg-gray-800' : 'bg-white'
     }`}>
-      <div className="text-3xl text-blue-500 flex justify-center mb-6">{icon}</div>
+      <div className="text-3xl text-[#A855F7] flex justify-center mb-6">{icon}</div>
       <h3 className="text-[13px] font-bold uppercase tracking-wider">{title}</h3>
     </div>
   );
@@ -635,7 +635,7 @@ const TimelineItem = ({ icon, date, title, sub, desc }: TimelineItemProps) => {
           ? 'bg-gray-800 border-gray-700' 
           : 'bg-white border-gray-100'
       }`}>
-        <span className="text-blue-600 font-bold text-xs uppercase tracking-widest">{date}</span>
+        <span className="text-[#A855F7] font-bold text-xs uppercase tracking-widest">{date}</span>
         <h3 className={`text-lg font-bold mt-2 ${
           theme === 'dark' ? 'text-white' : 'text-black'
         }`}>{title} <span className="text-gray-400 font-normal"> - {sub}</span></h3>
