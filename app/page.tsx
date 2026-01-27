@@ -11,6 +11,7 @@ import SectionHeader from './components/ui/SectionHeader';
 import StatCard from './components/ui/StatCard';
 import ProjectCard from './components/ui/ProjectCard';
 import ContactInfo from './components/ui/ContactInfo';
+import CertificateViewer from './components/CertificateViewer';
 import { useTheme } from './contexts/ThemeContext';
 
 // --- TYPE DEFINITIONS ---
@@ -227,7 +228,26 @@ export default function Page() {
     message: ''
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [isCertificateViewerOpen, setIsCertificateViewerOpen] = useState(false);
   const { theme } = useTheme();
+
+  // Certificates data
+  const certificates = [
+    {
+      id: 'sololearn',
+      title: 'Full-Stack Development',
+      issuer: 'Sololearn',
+      date: '2024',
+      imagePath: '/certificates/certification_Sololearn.jpg'
+    },
+    {
+      id: 'nexelix',
+      title: 'Professional Certification',
+      issuer: 'Nexelix',
+      date: '2024',
+      imagePath: '/certificates/certification_nexelix.jpeg'
+    }
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -308,7 +328,7 @@ export default function Page() {
                     if (slide.buttonText === "Download CV") {
                       window.open('/myResume/Saad-Abbasi-Resume.pdf', '_blank');
                     } else if (slide.buttonText === "View Certification") {
-                      window.open('/certificates/Certification_Sololearn.jpg', '_blank');
+                      setIsCertificateViewerOpen(true);
                     } else {
                       document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
                     }
@@ -533,6 +553,13 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* Certificate Viewer Modal */}
+      <CertificateViewer 
+        isOpen={isCertificateViewerOpen}
+        onClose={() => setIsCertificateViewerOpen(false)}
+        certificates={certificates}
+      />
 
     </div>
   );
