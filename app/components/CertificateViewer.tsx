@@ -31,6 +31,26 @@ const CertificateViewer: React.FC<CertificateViewerProps> = ({
   const [zoomLevel, setZoomLevel] = useState(1);
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  const [currentImagePath, setCurrentImagePath] = useState('');
+
+  // Generate fallback image paths
+  const getImagePaths = (originalPath: string) => {
+    const paths = [originalPath];
+    
+    // Try different variations
+    if (originalPath.includes('.jpg')) {
+      paths.push(originalPath.replace('.jpg', '.jpeg'));
+      paths.push(originalPath.replace('.jpg', '.png'));
+    } else if (originalPath.includes('.jpeg')) {
+      paths.push(originalPath.replace('.jpeg', '.jpg'));
+      paths.push(originalPath.replace('.jpeg', '.png'));
+    }
+    
+    // Try without leading slash
+    paths.push(originalPath.replace(/^\//, ''));
+    
+    return paths;
+  };
 
   useEffect(() => {
     setCurrentIndex(initialCertificateIndex);
@@ -41,9 +61,34 @@ const CertificateViewer: React.FC<CertificateViewerProps> = ({
 
   const currentCertificate = certificates[currentIndex];
 
+  // Debug logging
+  useEffect(() => {
+    if (currentCertificate) {
+      console.log('CertificateViewer - Current certificate:', currentCertificate);
+      console.log('CertificateViewer - Image path:', currentCertificate.imagePath);
+      setCurrentImagePath(currentCertificate.imagePath);
+    }
+  }, [currentCertificate, currentIndex]);
+
   const handlePrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? certificates.length - 1 : prev - 1));
     setZoomLevel(1);
+    setImageError(false);
+    setImageLoading(true);
+    // Reset to original path
+    if (certificates[(currentIndex === 0 ? certificates.length - 1 : currentIndex - 1)]) {
+      setCurrentImagePath(certificates[(currentIndex === 0 ? certificates.length - 1 : currentIndex - 1)].imagePath);
+    }
+  };
+
+  const handleRetry = () => {
+    const paths = getImagePaths(currentCertificate.imagePath);
+    const currentIndexInPaths = paths.indexOf(currentImagePath);
+    const nextPathIndex = (currentIndexInPaths + 1) % paths.length;
+    const nextPath = paths[nextPathIndex];
+    
+    console.log('CertificateViewer - Retrying with path:', nextPath);
+    setCurrentImagePath(nextPath);
     setImageError(false);
     setImageLoading(true);
   };
@@ -54,6 +99,10 @@ const CertificateViewer: React.FC<CertificateViewerProps> = ({
     setZoomLevel(1);
     setImageError(false);
     setImageLoading(true);
+    // Reset to original path
+    if (certificates[(currentIndex === certificates.length - 1 ? 0 : currentIndex + 1)]) {
+      setCurrentImagePath(certificates[(currentIndex === certificates.length - 1 ? 0 : currentIndex + 1)].imagePath);
+    }
   };
 
   const handleZoomIn = () => {
@@ -169,10 +218,7 @@ const CertificateViewer: React.FC<CertificateViewerProps> = ({
                 <p className="text-sm font-medium mb-2">Failed to load certificate</p>
                 <p className="text-xs mb-4">Please check your connection and try again</p>
                 <button
-                  onClick={() => {
-                    setImageError(false);
-                    setImageLoading(true);
-                  }}
+                  onClick={handleRetry}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     theme === 'dark' 
                       ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
@@ -188,15 +234,20 @@ const CertificateViewer: React.FC<CertificateViewerProps> = ({
                 style={{ transform: `scale(${zoomLevel})` }}
               >
                 <Image
-                  src={currentCertificate.imagePath}
+                  src={currentImagePath}
                   alt={currentCertificate.title}
                   width={1200}
                   height={900}
                   className="w-full h-auto object-contain rounded-lg shadow-2xl max-h-[60vh] lg:max-h-[70vh] xl:max-h-[75vh]"
                   priority
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 85vw, (max-width: 1280px) 80vw, 75vw"
-                  onLoad={() => setImageLoading(false)}
-                  onError={() => {
+                  onLoad={() => {
+                    console.log('CertificateViewer - Image loaded successfully:', currentImagePath);
+                    setImageLoading(false);
+                  }}
+                  onError={(e) => {
+                    console.error('CertificateViewer - Image failed to load:', currentImagePath);
+                    console.error('CertificateViewer - Error event:', e);
                     setImageLoading(false);
                     setImageError(true);
                   }}
@@ -301,6 +352,7 @@ const CertificateViewer: React.FC<CertificateViewerProps> = ({
                   setZoomLevel(1);
                   setImageError(false);
                   setImageLoading(true);
+                  setCurrentImagePath(certificates[index].imagePath);
                 }}
                 className={`flex-shrink-0 relative rounded-lg overflow-hidden transition-all ${
                   index === currentIndex 
@@ -309,7 +361,7 @@ const CertificateViewer: React.FC<CertificateViewerProps> = ({
                 }`}
               >
                 <Image
-                  src={cert.imagePath}
+                  src={index === currentIndex ? currentImagePath : cert.imagePath}
                   alt={cert.title}
                   width={80}
                   height={60}
