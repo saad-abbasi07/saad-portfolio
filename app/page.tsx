@@ -238,7 +238,7 @@ export default function Page() {
       title: 'Full-Stack Development',
       issuer: 'Sololearn',
       date: '2024',
-      imagePath: '/certificates/certification_Sololearn.jpg'
+      imagePath: '/certificates/certification_sololearn.jpg'
     },
     {
       id: 'nexelix',
