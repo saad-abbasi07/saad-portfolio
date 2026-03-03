@@ -12,6 +12,8 @@ import StatCard from './components/ui/StatCard';
 import ProjectCard from './components/ui/ProjectCard';
 import ContactInfo from './components/ui/ContactInfo';
 import CertificateViewer from './components/CertificateViewer';
+import Toast from './components/ui/Toast';
+import StickyNav from './components/ui/StickyNav';
 import { useTheme } from './contexts/ThemeContext';
 
 // --- TYPE DEFINITIONS ---
@@ -31,6 +33,7 @@ interface Project {
   technologies: string[];
   github: string;
   image: string;
+  demo?: string;
 }
 
 interface ExpertiseCardProps {
@@ -67,21 +70,63 @@ const slides = [
     subtitle: "I'm Saad",
     highlight: "Full Stack Software Engineer",
     description: "Full Stack Software Engineer & Machine Learning Developer. I build responsive products and smart solutions.",
-    buttonText: "Download CV",
-    image: "/images/main_images/Mypic.jpg",
+    buttonText: "Download My CV",
+    image: "/images/main_images/creatix.jpg",
+    action: "cv"
   },
   {
     id: 2,
-    title: "Expert",
-    subtitle: "Development",
-    highlight: "Machine Learning Developer",
-    description: "I'm a Full Stack Developer and Machine Learning Developer. I build responsive digital products and use data to create smart solutions.",
-    buttonText: "View Certification",
-    image: "/images/main_images/Mypic_2.jpg",
+    title: "View My",
+    subtitle: "Work",
+    highlight: "Live Projects & Demos",
+    description: "Explore my portfolio of deployed web applications and machine learning projects with interactive demos.",
+    buttonText: "View My Work",
+    image: "/images/main_images/my-pic.png",
+    action: "work"
   }
 ];
 
 const webProjects = [
+  {
+    title: "TeamFlow Collaboration Platform",
+    description: "A full-stack collaboration and task management platform with real-time messaging, project tracking, and role-based access control. Built to support seamless teamwork with modern web technologies and a responsive, interactive UI.",
+    technologies: ["Next.js", "React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Socket.io"],
+    github: "https://github.com/saad-abbasi07/TeamFlow-Collaboration-Platform",
+    image: "/images/projects_images/team-flow-collaboration-platform.png",
+    demo: "https://team-flow-collaboration-platform.vercel.app/"
+  },
+  {
+    title: "React Starter Web",
+    description: "A lightweight starter template for React projects. Includes basic folder structure, pre-configured routing, reusable components, and a ready-to-deploy setup.",
+    technologies: ["React", "Vite", "Tailwind", "React Router"],
+    github: "https://github.com/saad-abbasi07/react-starter-web",
+    image: "/images/projects_images/starter-web.png",
+    demo: "https://react-starter-web.vercel.app/"
+  },
+  {
+    title: "Ecommerce Estore NextJS",
+    description: "Responsive e-commerce storefront built with Next.js and Tailwind. Implemented dynamic product pages, category filters, and cart functionality.",
+    technologies: ["Next.js", "React", "Tailwind"],
+    github: "https://github.com/saad-abbasi07/ecommerce-estore-nextjs",
+    image: "/images/projects_images/e-store.png",
+    demo: "https://ecommerce-estore-nextjs.vercel.app/"
+  },
+  {
+    title: "FoodieOrder",
+    description: "React + Tailwind food delivery UI with restaurant listings, menus, cart, and authentication using context-based state management.",
+    technologies: ["React", "Tailwind", "React Router"],
+    github: "https://github.com/saad-abbasi07/FoodieOrder",
+    image: "/images/projects_images/foodieOrder.png",
+    demo: "https://foodie-order-lilac.vercel.app/"
+  },
+  {
+    title: "Weather App",
+    description: "Live weather updates for any city or country using React and Weather API. Implemented search functionality and responsive UI components.",
+    technologies: ["React", "Weather API", "Axios", "Tailwind"],
+    github: "https://github.com/saad-abbasi07/weather-app-react",
+    image: "/images/projects_images/weather-app.png",
+    demo: "https://weather-app-react-pied-three.vercel.app/"
+  },
   {
     title: "ConnectHub",
     description: "Full-stack social collaboration platform for sharing posts, chatting in real-time, and managing profiles. Implemented real-time messaging and profile management using MERN stack and Tailwind CSS.",
@@ -97,20 +142,6 @@ const webProjects = [
     image: "/images/projects_images/shopifyTheme.png",
   },
   {
-    title: "React Starter Web",
-    description: "A lightweight starter template for React projects. Includes basic folder structure, pre-configured routing, reusable components, and a ready-to-deploy setup.",
-    technologies: ["React", "Vite", "Tailwind", "React Router"],
-    github: "https://github.com/saad-abbasi07/react-starter-web",
-    image: "/images/projects_images/starter-web.png",
-  },
-  {
-    title: "My Certification",
-    description: "Modern personal portfolio built with Vite and Tailwind CSS. Focused on responsive design, project showcase, and high-performance optimizations.",
-    technologies: ["React", "Vite", "Tailwind"],
-    github: "https://github.com/saad-abbasi07/connectfolio",
-    image: "/images/projects_images/portfilioImage.png",
-  },
-  {
     title: "MERN Chat App",
     description: "Real-time chat application built with React, Node.js, Express, MongoDB, and Socket.io featuring socket-based messaging and multi-room support.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Socket.io"],
@@ -118,32 +149,11 @@ const webProjects = [
     image: "/images/projects_images/Mern_live_chat.png",
   },
   {
-    title: "Ecommerce Estore NextJS",
-    description: "Responsive e-commerce storefront built with Next.js and Tailwind. Implemented dynamic product pages, category filters, and cart functionality.",
-    technologies: ["Next.js", "React", "Tailwind"],
-    github: "https://github.com/saad-abbasi07/ecommerce-estore-nextjs",
-    image: "/images/projects_images/e-store.png",
-  },
-  {
-    title: "FoodieOrder",
-    description: "React + Tailwind food delivery UI with restaurant listings, menus, cart, and authentication using context-based state management.",
-    technologies: ["React", "Tailwind", "React Router"],
-    github: "https://github.com/saad-abbasi07/FoodieOrder",
-    image: "/images/projects_images/foodieOrder.png",
-  },
-  {
     title: "Enquiry Form App",
     description: "Dynamic enquiry form with insert/update table functionality. Integrated backend storage using MongoDB and built interactive table features.",
     technologies: ["React", "Axios", "Node.js", "MongoDB", "Flowbite"],
     github: "https://github.com/saad-abbasi07/userEnquiry",
     image: "/images/projects_images/enquiry-form.png",
-  },
-  {
-    title: "Weather App",
-    description: "Live weather updates for any city or country using React and Weather API. Implemented search functionality and responsive UI components.",
-    technologies: ["React", "Weather API", "Axios", "Tailwind"],
-    github: "https://github.com/saad-abbasi07/weather-app-react",
-    image: "/images/projects_images/weather-app.png",
   },
   {
     title: "Live Chat App",
@@ -182,6 +192,15 @@ const mlProjects = [
     technologies: ["Python", "NLP", "Scikit-learn", "TF-IDF", "Pandas"],
     github: "https://github.com/saad-abbasi07/fake-news-detector",
     image: "/images/projects_images/fake-news.png",
+    demo: "https://fake-news-detector-jxa6exrhjknrxcfncdxyro.streamlit.app/"
+  },
+  {
+    title: "Stock Price Predictor",
+    description: "Predicts stock prices and trends using historical data. Built with Python and Matplotlib for deep analysis and visualization.",
+    technologies: ["Python", "scikit-learn", "Pandas", "Matplotlib", "Stock Analysis", "AI"],
+    github: "https://github.com/saad-abbasi07/stock_price_predictor",
+    image: "/images/projects_images/stock-price-predictor.png",
+    demo: "https://stock-price-predictor-xbhm.vercel.app/"
   },
   {
     title: "Loan Approval ML Model",
@@ -211,13 +230,6 @@ const mlProjects = [
     github: "https://github.com/saad-abbasi07/SmartSpend-AI",
     image: "/images/projects_images/smartspend-ai.png",
   },
-  {
-    title: "Stock Price Predictor",
-    description: "Predicts stock prices and trends using historical data. Built with Python and Matplotlib for deep analysis and visualization.",
-    technologies: ["Python", "scikit-learn", "Pandas", "Matplotlib", "Stock Analysis", "AI"],
-    github: "https://github.com/saad-abbasi07/stock_price_predictor",
-    image: "/images/projects_images/stock-price-predictor.png",
-  },
 ];
 
 export default function Page() {
@@ -229,6 +241,9 @@ export default function Page() {
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [isCertificateViewerOpen, setIsCertificateViewerOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState<'success' | 'error'>('success');
   const { theme } = useTheme();
 
   // Certificates data
@@ -246,6 +261,13 @@ export default function Page() {
       issuer: 'Nexelix',
       date: '2024',
       imagePath: '/certificates/certification_nexelix.jpeg'
+    },
+    {
+      id: 'teaching',
+      title: 'Teaching Excellence Certificate',
+      issuer: 'Digital Dream',
+      date: '2026',
+      imagePath: '/certificates/Teaching_Certificate.jpg'
     }
   ];
 
@@ -266,6 +288,10 @@ export default function Page() {
     
     if (!formData.name || !formData.email || !formData.message) {
       setFormStatus('error');
+      setToastMessage('Please fill all fields correctly.');
+      setToastType('error');
+      setShowToast(true);
+      setTimeout(() => setFormStatus('idle'), 3000);
       return;
     }
 
@@ -282,14 +308,23 @@ export default function Page() {
 
       if (response.ok) {
         setFormStatus('success');
+        setToastMessage('Message sent successfully! I\'ll get back to you soon.');
+        setToastType('success');
+        setShowToast(true);
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setFormStatus('idle'), 3000);
       } else {
         setFormStatus('error');
+        setToastMessage('Failed to send message. Please try again.');
+        setToastType('error');
+        setShowToast(true);
         setTimeout(() => setFormStatus('idle'), 3000);
       }
     } catch (error) {
       setFormStatus('error');
+      setToastMessage('Network error. Please check your connection and try again.');
+      setToastType('error');
+      setShowToast(true);
       setTimeout(() => setFormStatus('idle'), 3000);
     }
   };
@@ -298,6 +333,8 @@ export default function Page() {
     <div className={`w-full font-sans overflow-x-hidden transition-colors duration-300 ${
       theme === 'dark' ? 'bg-gray-900' : 'bg-white'
     }`}>
+      {/* Sticky Navigation */}
+      <StickyNav />
       
       {/* 1. HERO SECTION */}
       <section id="home" className={`relative h-screen w-full overflow-hidden transition-colors duration-300 ${
@@ -325,12 +362,12 @@ export default function Page() {
                       : 'bg-[#A855F7] text-white hover:bg-[#A855F7]/90'
                   }`}
                   onClick={() => {
-                    if (slide.buttonText === "Download CV") {
+                    if (slide.action === "cv") {
                       window.open('/myResume/Saad-Abbasi-Resume.pdf', '_blank');
-                    } else if (slide.buttonText === "View Certification") {
-                      setIsCertificateViewerOpen(true);
-                    } else {
+                    } else if (slide.action === "work") {
                       document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
+                    } else if (slide.action === "certification") {
+                      setIsCertificateViewerOpen(true);
                     }
                   }}
                 >
@@ -406,13 +443,38 @@ export default function Page() {
       }`}>
         <div className="max-w-6xl">
           <SectionHeader subtitle="Expertise" title="Technical Skills" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-            <SkillBar skill="MongoDB / Express.js" percentage={92} color="bg-[#2c98f0]" />
-            <SkillBar skill="React / Node.js" percentage={90} color="bg-[#ec5453]" />
-            <SkillBar skill="React Native / Mobile" percentage={85} color="bg-[#f9bf3f]" />
-            <SkillBar skill="Next.js / TypeScript" percentage={88} color="bg-[#a84cb8]" />
-            <SkillBar skill="Python / ML (TensorFlow)" percentage={85} color="bg-[#2c98f0]" />
-            <SkillBar skill="Tailwind CSS / REST APIs" percentage={90} color="bg-[#ec5453]" />
+          
+          {/* Web Development Skills */}
+          <div className="mb-12">
+            <h3 className={`text-lg font-bold mb-6 text-[#A855F7] uppercase tracking-wider`}>Web Development</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+              <SkillBar skill="MongoDB / Express.js" percentage={92} color="bg-[#2c98f0]" />
+              <SkillBar skill="React / Node.js" percentage={90} color="bg-[#2c98f0]" />
+              <SkillBar skill="Next.js / TypeScript" percentage={88} color="bg-[#2c98f0]" />
+              <SkillBar skill="Tailwind CSS / REST APIs" percentage={90} color="bg-[#2c98f0]" />
+            </div>
+          </div>
+
+          {/* Machine Learning Skills */}
+          <div className="mb-12">
+            <h3 className={`text-lg font-bold mb-6 text-[#ec5453] uppercase tracking-wider`}>Machine Learning</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+              <SkillBar skill="Python / ML (TensorFlow)" percentage={85} color="bg-[#ec5453]" />
+              <SkillBar skill="Data Analysis (Pandas/NumPy)" percentage={82} color="bg-[#ec5453]" />
+              <SkillBar skill="Deep Learning (Neural Networks)" percentage={78} color="bg-[#ec5453]" />
+              <SkillBar skill="Computer Vision (OpenCV)" percentage={75} color="bg-[#ec5453]" />
+            </div>
+          </div>
+
+          {/* Deployment & DevOps Skills */}
+          <div>
+            <h3 className={`text-lg font-bold mb-6 text-[#f9bf3f] uppercase tracking-wider`}>Deployment & DevOps</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+              <SkillBar skill="Vercel / Netlify" percentage={88} color="bg-[#f9bf3f]" />
+              <SkillBar skill="Git / GitHub" percentage={92} color="bg-[#f9bf3f]" />
+              <SkillBar skill="Docker / CI/CD" percentage={76} color="bg-[#f9bf3f]" />
+              <SkillBar skill="Cloud Services (AWS/Azure)" percentage={70} color="bg-[#f9bf3f]" />
+            </div>
           </div>
         </div>
       </section>
@@ -543,16 +605,18 @@ export default function Page() {
                 >
                   {formStatus === 'loading' ? 'Sending...' : 'Send Message'}
                 </button>
-                {formStatus === 'success' && (
-                  <p className="md:col-span-2 text-green-600 text-sm">Message sent successfully!</p>
-                )}
-                {formStatus === 'error' && (
-                  <p className="md:col-span-2 text-red-600 text-sm">Please fill all fields correctly.</p>
-                )}
             </form>
           </div>
         </div>
       </section>
+
+      {/* Toast Notification */}
+      <Toast 
+        message={toastMessage}
+        type={toastType}
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
+      />
 
       {/* Certificate Viewer Modal */}
       <CertificateViewer 

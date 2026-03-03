@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import { FiGithub } from 'react-icons/fi';
 import { useTheme } from '../../contexts/ThemeContext';
 
@@ -8,6 +9,7 @@ interface Project {
   technologies: string[];
   github: string;
   image: string;
+  demo?: string;
 }
 
 interface ProjectCardProps {
@@ -18,10 +20,16 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, color }: ProjectCardProps) {
   const isBlue = color === "blue";
   const { theme } = useTheme();
+  const [isHovered, setIsHovered] = useState(false);
+  
   return (
-    <div className={`rounded-xl shadow-lg overflow-hidden flex flex-col h-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group min-h-[400px] relative ${
-      theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-    }`}>
+    <div 
+      className={`rounded-xl shadow-lg overflow-hidden flex flex-col h-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group min-h-[400px] relative ${
+        theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Attractive border gradient */}
       <div className={`absolute inset-0 rounded-xl p-[2px] bg-gradient-to-br ${
         isBlue 
@@ -35,6 +43,14 @@ export default function ProjectCard({ project, color }: ProjectCardProps) {
       
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full">
+        {/* Live Demo Badge */}
+        {project.demo && (
+          <div className="absolute top-3 right-3 z-20">
+            <span className="bg-[#A855F7] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
+              Live Demo
+            </span>
+          </div>
+        )}
         <div className="relative h-48 w-full shrink-0 overflow-hidden">
         <Image 
           src={project.image} 
@@ -44,6 +60,15 @@ export default function ProjectCard({ project, color }: ProjectCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           loading="lazy"
         />
+        {/* Hover overlay with project highlights */}
+        <div className={`absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4`}>
+          <div className="text-white">
+            <h4 className="text-sm font-bold mb-1">Key Features</h4>
+            <p className="text-xs opacity-90">
+              {isBlue ? "Full-stack development with modern technologies" : "Advanced ML algorithms and data analysis"}
+            </p>
+          </div>
+        </div>
       </div>
       <div className="p-4 sm:p-6 flex flex-col flex-grow">
         <h3 className={`text-base sm:text-lg font-bold mb-3 uppercase tracking-tight ${
@@ -64,20 +89,32 @@ export default function ProjectCard({ project, color }: ProjectCardProps) {
               </span>
             ))}
           </div>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors ${
-              isBlue 
-                ? 'text-[#A855F7] hover:text-[#A855F7]/80'
-                : theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-800'
-            }`}
-          >
-            <FiGithub className="text-sm sm:text-lg" />
-            <span className="hidden sm:inline">Github Repo</span>
-            <span className="sm:hidden">Github</span>
-          </a>
+          <div className="flex gap-3">
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors ${
+                isBlue 
+                  ? 'text-[#A855F7] hover:text-[#A855F7]/80'
+                  : theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-800'
+              }`}
+            >
+              <FiGithub className="text-sm sm:text-lg" />
+              <span className="hidden sm:inline">Github Repo</span>
+              <span className="sm:hidden">Github</span>
+            </a>
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 text-sm text-[#A855F7] font-bold hover:underline"
+              >
+                Live Demo
+              </a>
+            )}
+          </div>
         </div>
       </div>
       </div>

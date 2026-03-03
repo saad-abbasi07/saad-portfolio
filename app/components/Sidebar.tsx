@@ -140,10 +140,10 @@ const Sidebar = () => {
           <div className={`flex justify-center space-x-4 ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
           }`}>
-            <Link href="#" className="hover:text-[#A855F7] transition-colors"><FiFacebook size={14}/></Link>
-            <Link href="#" className="hover:text-[#A855F7] transition-colors"><FiTwitter size={14}/></Link>
-            <Link href="#" className="hover:text-[#A855F7] transition-colors"><FiInstagram size={14}/></Link>
-            <Link href="#" className="hover:text-[#A855F7] transition-colors"><FiLinkedin size={14}/></Link>
+            <a href="https://facebook.com/saad.abbasi.394980" target="_blank" rel="noopener noreferrer" className="hover:text-[#A855F7] transition-colors"><FiFacebook size={14}/></a>
+            <a href="https://twitter.com/07comrade007" target="_blank" rel="noopener noreferrer" className="hover:text-[#A855F7] transition-colors"><FiTwitter size={14}/></a>
+            <a href="https://instagram.com/saadabbasi07" target="_blank" rel="noopener noreferrer" className="hover:text-[#A855F7] transition-colors"><FiInstagram size={14}/></a>
+            <a href="https://linkedin.com/in/saad-abbasi-271953296" target="_blank" rel="noopener noreferrer" className="hover:text-[#A855F7] transition-colors"><FiLinkedin size={14}/></a>
           </div>
         </div>
       </aside>
