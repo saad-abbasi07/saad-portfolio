@@ -71,18 +71,18 @@ const slides = [
     highlight: "Full Stack Software Engineer",
     description: "Full Stack Software Engineer & Machine Learning Developer. I build responsive products and smart solutions.",
     buttonText: "Download My CV",
-    image: "/images/main_images/creatix.jpg",
+    image: "/images/main_images/Creatix.jpg",
     action: "cv"
   },
   {
     id: 2,
     title: "View My",
-    subtitle: "Work",
-    highlight: "Live Projects & Demos",
-    description: "Explore my portfolio of deployed web applications and machine learning projects with interactive demos.",
-    buttonText: "View My Work",
+    subtitle: "Certificates",
+    highlight: "Professional Certifications",
+    description: "View my professional certifications and achievements in full-stack development and machine learning.",
+    buttonText: "View Certificates",
     image: "/images/main_images/my-pic.png",
-    action: "work"
+    action: "certification"
   }
 ];
 
