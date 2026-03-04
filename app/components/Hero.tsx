@@ -38,17 +38,17 @@ export default function Hero({ slides }: HeroProps) {
             <div className={`max-w-2xl z-30 p-6 md:p-0 rounded-lg ${
             theme === 'dark' ? 'bg-gray-800/70 md:bg-transparent' : 'bg-white/70 md:bg-transparent'
           }`}>
-              <h2 className="text-primary font-bold tracking-[2px] text-[11px] sm:text-[12px] mb-4 font-sans">{slide.highlight}</h2>
-              <h1 className={`text-[35px] sm:text-[60px] lg:text-[80px] font-serif font-bold leading-[1.1] mb-6 ${
+              <h2 className="text-primary font-bold tracking-[2px] text-[11px] sm:text-[12px] mb-4 font-sans uppercase">{slide.highlight}</h2>
+              <h1 className={`text-[40px] sm:text-[70px] lg:text-[90px] font-serif font-bold leading-[1.1] mb-6 tracking-tight ${
                 theme === 'dark' ? 'text-white' : 'text-[#2c2c2c]'
               }`}>
                 {slide.title} <br /> <span className="text-primary">{slide.subtitle}</span>
               </h1>
-              <p className={`text-[14px] md:text-[15px] leading-relaxed mb-8 border-l-4 border-primary pl-4 max-w-md ${
+              <p className={`text-[15px] md:text-[16px] leading-relaxed text-gray-400 mb-8 border-l-4 border-primary pl-4 max-w-md ${
                 theme === 'dark' ? 'text-gray-300' : 'text-gray-500'
               }`}>{slide.description}</p>
               <button 
-                className={`px-10 py-4 uppercase tracking-widest text-[11px] font-bold transition-all shadow-lg ${
+                className={`px-10 py-4 uppercase tracking-widest text-[11px] font-bold transition-all duration-200 shadow-lg hover:scale-105 active:scale-95 ${
                   theme === 'dark' 
                     ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
                     : 'bg-primary text-primary-foreground hover:bg-primary/90'

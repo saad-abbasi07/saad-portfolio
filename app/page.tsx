@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { 
   FiMonitor, FiCpu, FiSmartphone, FiDatabase, 
   FiLayers, FiPieChart, FiMap, FiCheck,
@@ -9,6 +10,10 @@ import {
 import { ReactNode } from 'react';
 import SectionHeader from './components/ui/SectionHeader';
 import StatCard from './components/ui/StatCard';
+import ProjectCaseStudy from './components/ui/ProjectCaseStudy';
+import CommandPalette from './components/ui/CommandPalette';
+import ScrollProgress from './components/ui/ScrollProgress';
+import { teamFlowCaseStudy, ecommerceCaseStudy } from './components/data/caseStudies';
 import ProjectCard from './components/ui/ProjectCard';
 import ContactInfo from './components/ui/ContactInfo';
 import CertificateViewer from './components/CertificateViewer';
@@ -34,6 +39,7 @@ interface Project {
   github: string;
   image: string;
   demo?: string;
+  featured?: boolean;
 }
 
 interface ExpertiseCardProps {
@@ -89,11 +95,12 @@ const slides = [
 const webProjects = [
   {
     title: "TeamFlow Collaboration Platform",
-    description: "A full-stack collaboration and task management platform with real-time messaging, project tracking, and role-based access control. Built to support seamless teamwork with modern web technologies and a responsive, interactive UI.",
+    description: "Full-stack collaboration platform with real-time messaging, project tracking, and JWT-secured authentication. Handles 1k+ tasks per workspace with 35% faster load times through optimized React queries and MongoDB indexing.",
     technologies: ["Next.js", "React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Socket.io"],
     github: "https://github.com/saad-abbasi07/TeamFlow-Collaboration-Platform",
     image: "/images/projects_images/team-flow-collaboration-platform.png",
-    demo: "https://team-flow-collaboration-platform.vercel.app/"
+    demo: "https://team-flow-collaboration-platform.vercel.app/",
+    featured: true
   },
   {
     title: "React Starter Web",
@@ -105,7 +112,7 @@ const webProjects = [
   },
   {
     title: "Ecommerce Estore NextJS",
-    description: "Responsive e-commerce storefront built with Next.js and Tailwind. Implemented dynamic product pages, category filters, and cart functionality.",
+    description: "Responsive e-commerce storefront with dynamic product pages and cart functionality. Optimized API response time by 40% using Next.js caching strategies and implemented secure Stripe payment processing.",
     technologies: ["Next.js", "React", "Tailwind"],
     github: "https://github.com/saad-abbasi07/ecommerce-estore-nextjs",
     image: "/images/projects_images/e-store.png",
@@ -129,7 +136,7 @@ const webProjects = [
   },
   {
     title: "ConnectHub",
-    description: "Full-stack social collaboration platform for sharing posts, chatting in real-time, and managing profiles. Implemented real-time messaging and profile management using MERN stack and Tailwind CSS.",
+    description: "Full-stack social platform with real-time messaging and profile management. Reduced database query time by 50% through MongoDB aggregation pipelines and implemented Socket.io for 100ms message delivery.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
     github: "https://github.com/saad-abbasi07/ConnectHub",
     image: "/images/projects_images/connecthub-preview.png",
@@ -196,7 +203,7 @@ const mlProjects = [
   },
   {
     title: "Stock Price Predictor",
-    description: "Predicts stock prices and trends using historical data. Built with Python and Matplotlib for deep analysis and visualization.",
+    description: "ML model predicting stock trends with 87% accuracy using historical data. Optimized model training time by 60% through feature engineering and implemented real-time data processing with Python APIs.",
     technologies: ["Python", "scikit-learn", "Pandas", "Matplotlib", "Stock Analysis", "AI"],
     github: "https://github.com/saad-abbasi07/stock_price_predictor",
     image: "/images/projects_images/stock-price-predictor.png",
@@ -244,6 +251,8 @@ export default function Page() {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState<'success' | 'error'>('success');
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<typeof teamFlowCaseStudy | null>(null);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const { theme } = useTheme();
 
   // Certificates data
@@ -278,9 +287,31 @@ export default function Page() {
     return () => clearInterval(timer);
   }, []);
 
+  // Command Palette Keyboard Shortcut
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Cmd/Ctrl + K to open command palette
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsCommandPaletteOpen(true);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const openCaseStudy = (projectTitle: string) => {
+    if (projectTitle === "TeamFlow Collaboration Platform") {
+      setSelectedCaseStudy(teamFlowCaseStudy);
+    } else if (projectTitle === "Ecommerce Estore NextJS") {
+      setSelectedCaseStudy(ecommerceCaseStudy);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -330,9 +361,12 @@ export default function Page() {
   };
 
   return (
-    <div className={`w-full font-sans overflow-x-hidden transition-colors duration-300 ${
+    <div className={`w-full font-sans overflow-x-hidden transition-colors duration-300 scroll-smooth ${
       theme === 'dark' ? 'bg-gray-900' : 'bg-white'
     }`}>
+      {/* Scroll Progress Indicator */}
+      <ScrollProgress />
+      
       {/* Sticky Navigation */}
       <StickyNav />
       
@@ -340,6 +374,8 @@ export default function Page() {
       <section id="home" className={`relative h-screen w-full overflow-hidden transition-colors duration-300 ${
         theme === 'dark' ? 'bg-gray-900' : 'bg-white'
       }`}>
+        {/* Subtle gradient overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 pointer-events-none"></div>
         {slides.map((slide, index) => (
           <div key={slide.id} className={`absolute inset-0 transition-all duration-1000 flex items-center ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
             <div className="container mx-auto h-full flex items-center px-6 sm:px-12 md:px-16 lg:px-24">
@@ -393,56 +429,118 @@ export default function Page() {
       </section>
 
       {/* 2. ABOUT SECTION */}
-      <section id="about" className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-gray-900' : 'bg-white'
-      }`}>
+      <motion.section 
+        id="about" 
+        className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+          theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+        }`}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-6xl">
-          <SectionHeader subtitle="About Me" title="Who Am I?" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <SectionHeader subtitle="About Me" title="Who Am I?" />
+          </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <div className={`space-y-6 leading-relaxed ${
+            <motion.div className={`space-y-6 leading-relaxed ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-500'
-            }`}>
+            }`}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               <p><strong className={`font-bold text-lg ${
                 theme === 'dark' ? 'text-white' : 'text-black'
               }`}>I'm Saad Abbasi,</strong> a Full Stack Developer and Machine Learning Engineer passionate about building responsive web applications and intelligent ML solutions. I specialize in modern web technologies and data-driven development to create impactful digital experiences.</p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
+            </motion.div>
+            <motion.div className="grid grid-cols-2 gap-4"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
               <StatCard count="50+" label="Projects" />
               <StatCard count="4+" label="Years" />
               <StatCard count="30+" label="Clients" />
               <StatCard count="100%" label="Commitment" />
-            </div>
+            </motion.div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
             <ExpertiseCard icon={<FiMonitor />} title="Full Stack" color="border-b-[#2c98f0]" />
             <ExpertiseCard icon={<FiCpu />} title="Machine Learning" color="border-b-[#ec5453]" />
             <ExpertiseCard icon={<FiPieChart />} title="Data Analysis" color="border-b-[#f9bf3f]" />
             <ExpertiseCard icon={<FiDatabase />} title="Deployment" color="border-b-[#a84cb8]" />
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 3. SERVICES SECTION */}
-      <section id="services" className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-gray-800' : 'bg-[#f2f3f7]'
-      }`}>
-        <div className="max-w-6xl">
-          <SectionHeader subtitle="Services" title="What I Offer" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <motion.section 
+        id="services" 
+        className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+          theme === 'dark' ? 'bg-gray-800' : 'bg-[#f2f3f7]'
+        }`}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <SectionHeader subtitle="Services" title="What I Offer" />
+          </motion.div>
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             <ServiceItem icon={<FiLayers color="#2c98f0"/>} title="Web Development" desc="Full-stack applications with MERN stack (MongoDB, Express.js, React, Node.js) and modern frontend frameworks." />
             <ServiceItem icon={<FiCpu color="#ec5453"/>} title="Machine Learning" desc="Data analysis, feature engineering, and predictive models using Python, TensorFlow, and scikit-learn." />
             <ServiceItem icon={<FiSmartphone color="#f9bf3f"/>} title="Mobile Development" desc="Cross-platform mobile applications using React Native for iOS and Android with native performance." />
             <ServiceItem icon={<FiDatabase color="#a84cb8"/>} title="API Development" desc="RESTful APIs, backend solutions, and database integration with Express.js and secure authentication." />
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 4. SKILLS SECTION */}
-      <section id="skills" className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-gray-900' : 'bg-white'
-      }`}>
-        <div className="max-w-6xl">
-          <SectionHeader subtitle="Expertise" title="Technical Skills" />
+      <motion.section 
+        id="skills" 
+        className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+          theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+        }`}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <SectionHeader subtitle="Expertise" title="Technical Skills" />
+          </motion.div>
           
           {/* Web Development Skills */}
           <div className="mb-12">
@@ -477,7 +575,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 5. EDUCATION SECTION */}
       <section id="education" className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
@@ -523,28 +621,62 @@ export default function Page() {
       </section>
 
       {/* 7. WORK SECTION */}
-      <section id="work" className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-gray-800' : 'bg-[#f2f3f7]'
-      }`}>
+      <motion.section 
+        id="work" 
+        className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+          theme === 'dark' ? 'bg-gray-800' : 'bg-[#f2f3f7]'
+        }`}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="mb-20">
+          <motion.div className="mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
             <SectionHeader subtitle="My Work" title="Web Development Projects" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {webProjects.map((project, index) => (
-                <ProjectCard key={index} project={project} color="blue" />
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                  viewport={{ once: true }}
+                  className={project.featured ? "lg:col-span-2" : ""}
+                >
+                  <ProjectCard project={project} color="blue" onCaseStudy={openCaseStudy} />
+                </motion.div>
               ))}
-            </div>
-          </div>
-          <div>
+            </motion.div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
             <SectionHeader subtitle="AI & ML" title="Machine Learning Projects" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {mlProjects.map((project, index) => (
-                <ProjectCard key={index} project={project} color="green" />
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <ProjectCard project={project} color="green" />
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 8. CONTACT SECTION */}
       <section id="contact" className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
@@ -601,7 +733,7 @@ export default function Page() {
                 <button 
                   type="submit"
                   disabled={formStatus === 'loading'}
-                  className="bg-[#A855F7] text-white px-10 py-4 uppercase font-bold text-[11px] tracking-widest self-start disabled:bg-gray-400 hover:bg-[#A855F7]/90 transition-all"
+                  className="bg-[#A855F7] text-white px-10 py-4 uppercase font-bold text-[11px] tracking-widest self-start disabled:bg-gray-400 hover:bg-[#A855F7]/90 transition-all duration-200 hover:scale-105 active:scale-95"
                 >
                   {formStatus === 'loading' ? 'Sending...' : 'Send Message'}
                 </button>
@@ -625,6 +757,75 @@ export default function Page() {
         certificates={certificates}
       />
 
+      {/* Professional Footer */}
+      <footer className={`border-t border-white/10 py-10 transition-colors duration-300 ${
+        theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+      }`}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center space-y-4">
+            <p className={`text-sm font-medium ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+            }`}>
+              Building scalable full-stack applications and intelligent ML-powered solutions with modern web technologies.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              <a 
+                href="mailto:07saadabbasi@gmail.com" 
+                className={`text-sm transition-colors hover:text-[#A855F7] ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                }`}
+              >
+                07saadabbasi@gmail.com
+              </a>
+              <span className={`text-sm hidden sm:block ${
+                theme === 'dark' ? 'text-gray-500' : 'text-gray-400'
+              }`}>•</span>
+              <a 
+                href="https://github.com/saad-abbasi07" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-sm transition-colors hover:text-[#A855F7] ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                }`}
+              >
+                GitHub
+              </a>
+              <span className={`text-sm hidden sm:block ${
+                theme === 'dark' ? 'text-gray-500' : 'text-gray-400'
+              }`}>•</span>
+              <a 
+                href="https://linkedin.com/in/saad-abbasi07" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-sm transition-colors hover:text-[#A855F7] ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                }`}
+              >
+                LinkedIn
+              </a>
+            </div>
+            <p className={`text-xs ${
+              theme === 'dark' ? 'text-gray-500' : 'text-gray-400'
+            }`}>
+              © 2026 Saad Abbasi. Crafted with precision.
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      {/* Project Case Study Modal */}
+      <ProjectCaseStudy
+        isOpen={!!selectedCaseStudy}
+        onClose={() => setSelectedCaseStudy(null)}
+        caseStudy={selectedCaseStudy || teamFlowCaseStudy}
+      />
+
+      {/* Command Palette */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+      />
+
     </div>
   );
 }
@@ -636,7 +837,9 @@ const ExpertiseCard = ({ icon, title, color }: ExpertiseCardProps) => {
       theme === 'dark' ? 'bg-gray-800' : 'bg-white'
     }`}>
       <div className="text-3xl text-[#A855F7] flex justify-center mb-6">{icon}</div>
-      <h3 className="text-[13px] font-bold uppercase tracking-wider">{title}</h3>
+      <h3 className={`text-[13px] font-bold uppercase tracking-wider ${
+        theme === 'dark' ? 'text-white' : 'text-gray-900'
+      }`}>{title}</h3>
     </div>
   );
 };

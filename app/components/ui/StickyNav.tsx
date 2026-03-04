@@ -59,30 +59,36 @@ export default function StickyNav() {
   if (!isVisible) return null;
 
   return (
-    <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-300`}>
-      <nav className={`flex items-center gap-1 px-4 py-2 rounded-full shadow-lg backdrop-blur-md ${
+    <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+    }`}>
+      <div className={`sticky top-0 backdrop-blur-lg bg-black/30 border-b border-white/10 ${
         theme === 'dark' 
-          ? 'bg-gray-900/90 border border-gray-700' 
-          : 'bg-white/90 border border-gray-200'
+          ? 'bg-gray-900/80' 
+          : 'bg-white/80'
       }`}>
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => scrollToSection(item.id)}
-            className={`flex items-center gap-2 px-3 py-2 rounded-full text-xs font-medium transition-all duration-200 ${
-              activeSection === item.id
-                ? 'bg-[#A855F7] text-white'
-                : theme === 'dark'
-                  ? 'text-gray-300 hover:text-white hover:bg-gray-700'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-            }`}
-            title={item.label}
-          >
-            <span className="text-sm">{item.icon}</span>
-            <span className="hidden sm:inline">{item.label}</span>
-          </button>
-        ))}
-      </nav>
+        <nav className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-center gap-1 sm:gap-2">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                  activeSection === item.id
+                    ? 'bg-[#A855F7] text-white shadow-lg shadow-[#A855F7]/25'
+                    : theme === 'dark'
+                      ? 'text-gray-300 hover:text-white hover:bg-white/10'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-900/10'
+                }`}
+                title={item.label}
+              >
+                <span className="text-sm">{item.icon}</span>
+                <span className="hidden sm:inline">{item.label}</span>
+              </button>
+            ))}
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }
