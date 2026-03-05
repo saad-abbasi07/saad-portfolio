@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { FiGithub, FiZoomIn } from 'react-icons/fi';
+import { FiGithub, FiZoomIn, FiExternalLink } from 'react-icons/fi';
 import { useTheme } from '../../contexts/ThemeContext';
 import ImageLightbox from './ImageLightbox';
 
@@ -18,9 +18,10 @@ interface ProjectCardProps {
   project: Project;
   color: "blue" | "green";
   onCaseStudy?: (projectTitle: string) => void;
+  specialWidth?: boolean;
 }
 
-export default function ProjectCard({ project, color, onCaseStudy }: ProjectCardProps) {
+export default function ProjectCard({ project, color, onCaseStudy, specialWidth }: ProjectCardProps) {
   const isBlue = color === "blue";
   const { theme } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
@@ -28,36 +29,25 @@ export default function ProjectCard({ project, color, onCaseStudy }: ProjectCard
   
   return (
     <div 
-      className={`rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-[#A855F7]/10 group min-h-[400px] relative bg-white/5 backdrop-blur border border-white/10 ${
-        theme === 'dark' ? 'bg-gray-800/50' : 'bg-white/80'
-      } ${project.featured ? 'ring-2 ring-purple-500/50 hover:ring-purple-500/70' : ''}`}
+      className={`rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group min-h-[400px] relative ${
+        theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'
+      } ${project.featured ? 'ring-2 ring-purple-500/30' : ''} ${specialWidth ? 'lg:col-span-2' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Attractive border gradient */}
-      <div className={`absolute inset-0 rounded-xl p-[2px] bg-gradient-to-br ${
-        isBlue 
-          ? 'from-[#A855F7] via-purple-500 to-[#A855F7]/60' 
-          : 'from-emerald-400 via-emerald-500 to-emerald-600'
-      } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
-        <div className={`w-full h-full rounded-xl ${
-          theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-        }`}></div>
-      </div>
-      
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full">
         {/* Featured Project Badge */}
         {project.featured && (
-          <div className="absolute top-3 left-3 z-20">
-            <span className="text-xs px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full font-medium">
-              Featured Project
+          <div className="absolute top-4 left-4 z-20">
+            <span className="text-xs px-3 py-1 bg-purple-500 text-white rounded-full font-medium">
+              Featured
             </span>
           </div>
         )}
         {/* Live Demo Badge */}
         {project.demo && (
-          <div className="absolute top-3 right-3 z-20">
+          <div className="absolute top-4 right-4 z-20">
             <span className="bg-[#A855F7] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
               Live Demo
             </span>
@@ -73,6 +63,9 @@ export default function ProjectCard({ project, color, onCaseStudy }: ProjectCard
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           loading="lazy"
+          quality={75}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8A8A"
         />
         {/* Zoom indicator */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
@@ -81,21 +74,12 @@ export default function ProjectCard({ project, color, onCaseStudy }: ProjectCard
             <span className="text-xs font-medium">Click to zoom</span>
           </div>
         </div>
-        {/* Hover overlay with project highlights */}
-        <div className={`absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4`}>
-          <div className="text-white">
-            <h4 className="text-sm font-bold mb-1">Key Features</h4>
-            <p className="text-xs opacity-90">
-              {isBlue ? "Full-stack development with modern technologies" : "Advanced ML algorithms and data analysis"}
-            </p>
-          </div>
-        </div>
       </div>
       <div className="p-6 space-y-3 flex flex-col flex-grow">
         <h3 className={`text-lg sm:text-xl font-bold tracking-tight uppercase ${
           theme === 'dark' ? 'text-white' : 'text-gray-900'
         }`}>{project.title}</h3>
-        <p className={`text-sm leading-relaxed text-gray-400 flex-grow ${
+        <p className={`text-sm leading-relaxed flex-grow ${
           theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
         }`}>{project.description}</p>
         <div className="mt-auto">
@@ -110,11 +94,11 @@ export default function ProjectCard({ project, color, onCaseStudy }: ProjectCard
               </span>
             ))}
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2 flex-wrap">
             {onCaseStudy && (project.title === "TeamFlow Collaboration Platform" || project.title === "Ecommerce Estore NextJS") && (
               <button
                 onClick={() => onCaseStudy(project.title)}
-                className="inline-flex items-center gap-1 text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 text-purple-400 hover:text-purple-300"
+                className="inline-flex items-center gap-2 px-4 py-3 text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 shadow-md hover:shadow-lg min-h-[44px]"
               >
                 <span className="hidden sm:inline">Case Study</span>
                 <span className="sm:hidden">Study</span>
@@ -124,22 +108,22 @@ export default function ProjectCard({ project, color, onCaseStudy }: ProjectCard
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-1 text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 ${
+              className={`inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 min-h-[44px] ${
                 isBlue 
                   ? 'text-blue-400 hover:text-blue-300'
                   : theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-700'
               }`}
             >
-              <FiGithub className="text-sm sm:text-lg" />
-              <span className="hidden sm:inline">Github Repo</span>
-              <span className="sm:hidden">Github</span>
+              <FiGithub className="text-sm" />
+              <span className="hidden sm:inline">GitHub</span>
+              <span className="sm:hidden">Code</span>
             </a>
             {project.demo && (
               <a
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 text-[#A855F7] hover:text-[#A855F7]/90"
+                className="inline-flex items-center gap-2 px-4 py-3 text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 shadow-md hover:shadow-lg min-h-[44px]"
               >
                 <span className="hidden sm:inline">Live Demo</span>
                 <span className="sm:hidden">Demo</span>

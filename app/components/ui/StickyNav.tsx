@@ -73,7 +73,7 @@ export default function StickyNav() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`flex items-center gap-1 px-3 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                className={`flex items-center gap-2 px-3 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 hover:scale-105 ${
                   activeSection === item.id
                     ? 'bg-[#A855F7] text-white shadow-lg shadow-[#A855F7]/25'
                     : theme === 'dark'

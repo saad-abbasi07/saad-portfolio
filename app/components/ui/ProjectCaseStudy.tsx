@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiX, FiExternalLink, FiGithub, FiUsers, FiZap, FiShield, FiDatabase, FiCode, FiTrendingUp, FiAward } from 'react-icons/fi';
+import { FiX, FiExternalLink, FiGithub, FiUsers, FiZap, FiShield, FiDatabase, FiCode, FiTrendingUp, FiAward, FiArrowLeft } from 'react-icons/fi';
 import Image from 'next/image';
 import { useTheme } from '../../contexts/ThemeContext';
 
@@ -49,6 +49,17 @@ interface ProjectCaseStudyProps {
 
 export default function ProjectCaseStudy({ isOpen, onClose, caseStudy }: ProjectCaseStudyProps) {
   const { theme } = useTheme();
+
+  const handleBack = () => {
+    onClose();
+    // Scroll to work section after a short delay to allow modal to close
+    setTimeout(() => {
+      const workSection = document.getElementById('work');
+      if (workSection) {
+        workSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   return (
     <AnimatePresence>
@@ -112,6 +123,15 @@ export default function ProjectCaseStudy({ isOpen, onClose, caseStudy }: Project
                   className="absolute top-4 right-4 p-2 rounded-full bg-white/10 backdrop-blur text-white hover:bg-white/20 transition-colors"
                 >
                   <FiX className="text-xl" />
+                </button>
+
+                {/* Back Button */}
+                <button
+                  onClick={handleBack}
+                  className="absolute top-4 left-4 p-2 rounded-full bg-white/10 backdrop-blur text-white hover:bg-white/20 transition-colors"
+                  title="Back to Projects"
+                >
+                  <FiArrowLeft className="text-xl" />
                 </button>
               </div>
 

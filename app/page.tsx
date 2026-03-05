@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { 
   FiMonitor, FiCpu, FiSmartphone, FiDatabase, 
   FiLayers, FiPieChart, FiMap, FiCheck,
-  FiMail, FiPhone, FiMapPin, FiGithub, FiExternalLink, FiBookOpen, FiBriefcase
+  FiMail, FiPhone, FiMapPin, FiGithub, FiExternalLink, FiBookOpen, FiBriefcase, FiCode, FiZap
 } from 'react-icons/fi';
 import { ReactNode } from 'react';
 import SectionHeader from './components/ui/SectionHeader';
@@ -374,28 +374,26 @@ export default function Page() {
       <section id="home" className={`relative h-screen w-full overflow-hidden transition-colors duration-300 ${
         theme === 'dark' ? 'bg-gray-900' : 'bg-white'
       }`}>
-        {/* Subtle gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 pointer-events-none"></div>
+        {/* Subtle gradient overlay for depth - reduced opacity */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 pointer-events-none"></div>
         {slides.map((slide, index) => (
           <div key={slide.id} className={`absolute inset-0 transition-all duration-1000 flex items-center ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
-            <div className="container mx-auto h-full flex items-center px-6 sm:px-12 md:px-16 lg:px-24">
+            <div className="container mx-auto h-full flex items-center px-8 sm:px-12 md:px-16 lg:px-24">
               <div className={`max-w-2xl z-30 p-6 md:p-0 rounded-lg ${
                 theme === 'dark' ? 'bg-gray-800/70 md:bg-transparent' : 'bg-white/70 md:bg-transparent'
               }`}>
-                <h2 className="text-[#A855F7] font-bold tracking-[2px] text-[11px] mb-4">{slide.highlight}</h2>
-                <h1 className={`text-[35px] sm:text-[60px] lg:text-[80px] font-serif font-bold leading-[1.1] mb-6 ${
+                <h2 className="text-[#A855F7] font-black tracking-[3px] text-[12px] mb-6 uppercase">{slide.highlight}</h2>
+                <h1 className={`text-[40px] sm:text-[70px] lg:text-[90px] font-serif font-black leading-[1.05] mb-8 ${
                   theme === 'dark' ? 'text-white' : 'text-[#A855F7]'
                 }`}>
-                  {slide.title} <br /> <span className="text-[#A855F7]">{slide.subtitle}</span>
+                  {slide.title} <br /> <span className="text-[#A855F7] font-black">{slide.subtitle}</span>
                 </h1>
-                <p className={`text-[14px] md:text-[15px] leading-relaxed mb-8 border-l-4 border-[#A855F7] pl-4 max-w-md ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-500'
+                <p className={`text-[15px] md:text-[16px] leading-relaxed mb-10 border-l-4 border-[#A855F7] pl-6 max-w-lg font-medium ${
+                  theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
                 }`}>{slide.description}</p>
                 <button 
-                  className={`px-10 py-4 uppercase tracking-widest text-[11px] font-bold transition-all shadow-lg ${
-                    theme === 'dark' 
-                      ? 'bg-[#A855F7] text-white hover:bg-[#A855F7]/90' 
-                      : 'bg-[#A855F7] text-white hover:bg-[#A855F7]/90'
+                  className={`px-8 py-4 uppercase tracking-widest text-[11px] font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[48px] bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 ${
+                    theme === 'dark' ? 'shadow-purple-500/25' : 'shadow-purple-500/20'
                   }`}
                   onClick={() => {
                     if (slide.action === "cv") {
@@ -419,10 +417,11 @@ export default function Page() {
                   className="object-cover object-center md:object-right" 
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={80}
                 />
                 <div className={`absolute inset-0 ${
-                  theme === 'dark' ? 'bg-gray-800/40 md:bg-transparent md:bg-gradient-to-r md:from-gray-900' : 'bg-white/40 md:bg-transparent md:bg-gradient-to-r md:from-white'
-                } md:via-white/10 md:to-transparent`}></div>
+                  theme === 'dark' ? 'bg-gray-800/20 md:bg-transparent md:bg-gradient-to-r md:from-gray-900/80' : 'bg-white/20 md:bg-transparent md:bg-gradient-to-r md:from-white/80'
+                } md:via-white/5 md:to-transparent`}></div>
             </div>
           </div>
         ))}
@@ -431,7 +430,7 @@ export default function Page() {
       {/* 2. ABOUT SECTION */}
       <motion.section 
         id="about" 
-        className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+        className={`py-24 px-8 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
           theme === 'dark' ? 'bg-gray-900' : 'bg-white'
         }`}
         initial={{ opacity: 0, y: 40 }}
@@ -490,7 +489,7 @@ export default function Page() {
       {/* 3. SERVICES SECTION */}
       <motion.section 
         id="services" 
-        className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+        className={`py-24 px-8 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
           theme === 'dark' ? 'bg-gray-800' : 'bg-[#f2f3f7]'
         }`}
         initial={{ opacity: 0, y: 40 }}
@@ -524,7 +523,7 @@ export default function Page() {
       {/* 4. SKILLS SECTION */}
       <motion.section 
         id="skills" 
-        className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+        className={`py-24 px-8 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
           theme === 'dark' ? 'bg-gray-900' : 'bg-white'
         }`}
         initial={{ opacity: 0, y: 40 }}
@@ -543,42 +542,74 @@ export default function Page() {
           </motion.div>
           
           {/* Web Development Skills */}
-          <div className="mb-12">
-            <h3 className={`text-lg font-bold mb-6 text-[#A855F7] uppercase tracking-wider`}>Web Development</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-              <SkillBar skill="MongoDB / Express.js" percentage={92} color="bg-[#2c98f0]" />
-              <SkillBar skill="React / Node.js" percentage={90} color="bg-[#2c98f0]" />
-              <SkillBar skill="Next.js / TypeScript" percentage={88} color="bg-[#2c98f0]" />
-              <SkillBar skill="Tailwind CSS / REST APIs" percentage={90} color="bg-[#2c98f0]" />
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <div className={`flex items-center gap-4 mb-8 pb-4 border-b-2 border-gray-200 dark:border-gray-700`}>
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                <FiCode className="text-white text-xl" />
+              </div>
+              <h3 className={`text-2xl font-black text-blue-500 dark:text-blue-400 uppercase tracking-wider`}>Web Development</h3>
             </div>
-          </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <SkillBar skill="MongoDB / Express.js" percentage={92} color="bg-blue-500" />
+              <SkillBar skill="React / Node.js" percentage={90} color="bg-blue-500" />
+              <SkillBar skill="Next.js / TypeScript" percentage={88} color="bg-blue-500" />
+              <SkillBar skill="Tailwind CSS / REST APIs" percentage={90} color="bg-blue-500" />
+            </div>
+          </motion.div>
 
           {/* Machine Learning Skills */}
-          <div className="mb-12">
-            <h3 className={`text-lg font-bold mb-6 text-[#ec5453] uppercase tracking-wider`}>Machine Learning</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-              <SkillBar skill="Python / ML (TensorFlow)" percentage={85} color="bg-[#ec5453]" />
-              <SkillBar skill="Data Analysis (Pandas/NumPy)" percentage={82} color="bg-[#ec5453]" />
-              <SkillBar skill="Deep Learning (Neural Networks)" percentage={78} color="bg-[#ec5453]" />
-              <SkillBar skill="Computer Vision (OpenCV)" percentage={75} color="bg-[#ec5453]" />
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <div className={`flex items-center gap-4 mb-8 pb-4 border-b-2 border-gray-200 dark:border-gray-700`}>
+              <div className="w-12 h-12 bg-gradient-to-br from-red-400 to-red-500 rounded-xl flex items-center justify-center shadow-lg">
+                <FiCpu className="text-white text-xl" />
+              </div>
+              <h3 className={`text-2xl font-black text-red-500 dark:text-red-400 uppercase tracking-wider`}>Machine Learning</h3>
             </div>
-          </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <SkillBar skill="Python / ML (TensorFlow)" percentage={85} color="bg-red-500" />
+              <SkillBar skill="Data Analysis (Pandas/NumPy)" percentage={82} color="bg-red-500" />
+              <SkillBar skill="Deep Learning (Neural Networks)" percentage={78} color="bg-red-500" />
+              <SkillBar skill="Computer Vision (OpenCV)" percentage={75} color="bg-red-500" />
+            </div>
+          </motion.div>
 
           {/* Deployment & DevOps Skills */}
-          <div>
-            <h3 className={`text-lg font-bold mb-6 text-[#f9bf3f] uppercase tracking-wider`}>Deployment & DevOps</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-              <SkillBar skill="Vercel / Netlify" percentage={88} color="bg-[#f9bf3f]" />
-              <SkillBar skill="Git / GitHub" percentage={92} color="bg-[#f9bf3f]" />
-              <SkillBar skill="Docker / CI/CD" percentage={76} color="bg-[#f9bf3f]" />
-              <SkillBar skill="Cloud Services (AWS/Azure)" percentage={70} color="bg-[#f9bf3f]" />
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <div className={`flex items-center gap-4 mb-8 pb-4 border-b-2 border-gray-200 dark:border-gray-700`}>
+              <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-500 rounded-xl flex items-center justify-center shadow-lg">
+                <FiZap className="text-white text-xl" />
+              </div>
+              <h3 className={`text-2xl font-black text-amber-500 dark:text-amber-400 uppercase tracking-wider`}>Deployment & DevOps</h3>
             </div>
-          </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <SkillBar skill="Vercel / Netlify" percentage={88} color="bg-amber-500" />
+              <SkillBar skill="Git / GitHub" percentage={92} color="bg-amber-500" />
+              <SkillBar skill="Docker / CI/CD" percentage={76} color="bg-amber-500" />
+              <SkillBar skill="Cloud Services (AWS/Azure)" percentage={70} color="bg-amber-500" />
+            </div>
+          </motion.div>
         </div>
       </motion.section>
 
       {/* 5. EDUCATION SECTION */}
-      <section id="education" className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+      <section id="education" className={`py-24 px-8 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
         theme === 'dark' ? 'bg-gray-800' : 'bg-[#f2f3f7]'
       }`}>
         <div className="max-w-6xl">
@@ -596,7 +627,7 @@ export default function Page() {
       </section>
 
       {/* 6. EXPERIENCE SECTION */}
-      <section id="experience" className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+      <section id="experience" className={`py-32 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
         theme === 'dark' ? 'bg-gray-900' : 'bg-white'
       }`}>
         <div className="max-w-6xl">
@@ -623,7 +654,7 @@ export default function Page() {
       {/* 7. WORK SECTION */}
       <motion.section 
         id="work" 
-        className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+        className={`py-24 px-8 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
           theme === 'dark' ? 'bg-gray-800' : 'bg-[#f2f3f7]'
         }`}
         initial={{ opacity: 0, y: 40 }}
@@ -649,7 +680,12 @@ export default function Page() {
                   viewport={{ once: true }}
                   className={project.featured ? "lg:col-span-2" : ""}
                 >
-                  <ProjectCard project={project} color="blue" onCaseStudy={openCaseStudy} />
+                  <ProjectCard 
+                    project={project} 
+                    color="blue" 
+                    onCaseStudy={openCaseStudy}
+                    specialWidth={project.title === "Ecommerce Estore NextJS"}
+                  />
                 </motion.div>
               ))}
             </motion.div>
@@ -679,7 +715,7 @@ export default function Page() {
       </motion.section>
 
       {/* 8. CONTACT SECTION */}
-      <section id="contact" className={`py-24 px-6 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
+      <section id="contact" className={`py-24 px-8 sm:px-12 md:px-16 lg:px-24 transition-colors duration-300 ${
         theme === 'dark' ? 'bg-gray-900' : 'bg-white'
       }`}>
         <div className="max-w-6xl">
@@ -697,7 +733,7 @@ export default function Page() {
                   placeholder="Name" 
                   value={formData.name}
                   onChange={handleInputChange}
-                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] ${
+                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] min-h-[48px] ${
                     theme === 'dark' 
                       ? 'bg-gray-800 text-white border-gray-600' 
                       : 'bg-[#f2f3f7] text-black'
@@ -710,7 +746,7 @@ export default function Page() {
                   placeholder="Email" 
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] ${
+                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] min-h-[48px] ${
                     theme === 'dark' 
                       ? 'bg-gray-800 text-white border-gray-600' 
                       : 'bg-[#f2f3f7] text-black'
@@ -733,7 +769,9 @@ export default function Page() {
                 <button 
                   type="submit"
                   disabled={formStatus === 'loading'}
-                  className="bg-[#A855F7] text-white px-10 py-4 uppercase font-bold text-[11px] tracking-widest self-start disabled:bg-gray-400 hover:bg-[#A855F7]/90 transition-all duration-200 hover:scale-105 active:scale-95"
+                  className={`px-8 py-4 uppercase tracking-widest text-[11px] font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[48px] bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed disabled:hover:scale-100 self-start ${
+                    theme === 'dark' ? 'shadow-purple-500/25' : 'shadow-purple-500/20'
+                  }`}
                 >
                   {formStatus === 'loading' ? 'Sending...' : 'Send Message'}
                 </button>
@@ -833,11 +871,11 @@ export default function Page() {
 const ExpertiseCard = ({ icon, title, color }: ExpertiseCardProps) => {
   const { theme } = useTheme();
   return (
-    <div className={`p-8 shadow-lg border-b-4 ${color} text-center ${
+    <div className={`p-10 shadow-lg border-b-4 ${color} text-center ${
       theme === 'dark' ? 'bg-gray-800' : 'bg-white'
     }`}>
       <div className="text-3xl text-[#A855F7] flex justify-center mb-6">{icon}</div>
-      <h3 className={`text-[13px] font-bold uppercase tracking-wider ${
+      <h3 className={`text-[15px] font-black uppercase tracking-wider ${
         theme === 'dark' ? 'text-white' : 'text-gray-900'
       }`}>{title}</h3>
     </div>
@@ -847,7 +885,7 @@ const ExpertiseCard = ({ icon, title, color }: ExpertiseCardProps) => {
 const ServiceItem = ({ icon, title, desc }: ServiceItemProps) => {
   const { theme } = useTheme();
   return (
-    <div className={`p-6 sm:p-8 shadow-lg border rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group min-h-[280px] ${
+    <div className={`p-8 sm:p-10 shadow-lg border rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group min-h-[300px] ${
       theme === 'dark' 
         ? 'bg-gray-800 border-gray-700' 
         : 'bg-white border-gray-100'
@@ -857,7 +895,7 @@ const ServiceItem = ({ icon, title, desc }: ServiceItemProps) => {
       }`}>
         <div className="text-3xl">{icon}</div>
       </div>
-      <h3 className={`text-[16px] sm:text-[18px] font-bold uppercase mb-4 tracking-wide ${
+      <h3 className={`text-[18px] sm:text-[20px] font-black uppercase mb-4 tracking-wide ${
         theme === 'dark' ? 'text-white' : 'text-gray-900'
       }`}>{title}</h3>
       <p className={`text-[13px] sm:text-[14px] leading-relaxed font-medium ${
@@ -870,19 +908,21 @@ const ServiceItem = ({ icon, title, desc }: ServiceItemProps) => {
 const SkillBar = ({ skill, percentage, color }: SkillBarProps) => {
   const { theme } = useTheme();
   return (
-    <div className="w-full">
-      <div className="flex justify-between mb-2">
-        <span className={`text-[12px] font-bold uppercase tracking-widest ${
-          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+    <div className="w-full mb-6">
+      <div className="flex justify-between items-center mb-3">
+        <span className={`text-[14px] font-semibold uppercase tracking-wider ${
+          theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
         }`}>{skill}</span>
-        <span className={`text-[12px] font-bold ${
-          theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+        <span className={`text-[16px] font-bold ${
+          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
         }`}>{percentage}%</span>
       </div>
-      <div className={`w-full h-[6px] rounded-full overflow-hidden ${
+      <div className={`w-full h-[8px] rounded-full overflow-hidden shadow-inner ${
         theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200'
       }`}>
-        <div className={`h-full ${color} transition-all duration-1000`} style={{ width: `${percentage}%` }}></div>
+        <div className={`h-full ${color} transition-all duration-1000 ease-out relative`} style={{ width: `${percentage}%` }}>
+          <div className="absolute inset-0 bg-white/20 rounded-full blur-sm"></div>
+        </div>
       </div>
     </div>
   );
@@ -897,13 +937,13 @@ const TimelineItem = ({ icon, date, title, sub, desc }: TimelineItemProps) => {
       }`}>
         {icon}
       </div>
-      <div className={`p-6 shadow-sm border ${
+      <div className={`p-8 shadow-sm border ${
         theme === 'dark' 
           ? 'bg-gray-800 border-gray-700' 
           : 'bg-white border-gray-100'
       }`}>
         <span className="text-[#A855F7] font-bold text-xs uppercase tracking-widest">{date}</span>
-        <h3 className={`text-lg font-bold mt-2 ${
+        <h3 className={`text-xl font-black mt-2 ${
           theme === 'dark' ? 'text-white' : 'text-black'
         }`}>{title} <span className="text-gray-400 font-normal"> - {sub}</span></h3>
         <p className={`text-sm mt-4 leading-relaxed ${
