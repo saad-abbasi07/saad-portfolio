@@ -42,84 +42,84 @@ export const teamFlowCaseStudy: CaseStudyData = {
   title: "TeamFlow Enterprise Collaboration",
   heroImage: "/images/projects_images/team-flow-collaboration-platform.png",
   overview: {
-    problem: "Growing tech teams (10-50 members) struggled with tool fragmentation between Slack, Jira, and Confluence. This led to $50K+ monthly productivity losses from context switching, missed deadlines, and poor cross-team visibility. Existing enterprise solutions were prohibitively expensive ($20+/user/month) and overly complex for agile teams.",
-    solution: "Architected a scalable collaboration platform that unified real-time messaging, advanced project management, and comprehensive team analytics. Built enterprise-grade features including SSO integration, advanced permissions, and automated reporting while maintaining simplicity for daily use.",
+    problem: "Teams struggled with scattered communication tools, leading to missed deadlines and poor collaboration. Existing solutions were either too expensive or overly complex for agile teams.",
+    solution: "Built a unified collaboration platform combining real-time messaging, project management, and team analytics. Focused on simplicity while adding enterprise features like SSO and advanced permissions.",
     timeline: "4 months (Full-time development)",
     role: "Lead Full Stack Developer & System Architect"
   },
   architecture: {
-    description: "Microservices architecture with Next.js frontend, Node.js/Express backend services, and MongoDB cluster. Implemented Redis for session management and caching, Socket.io for real-time features, and Elasticsearch for advanced search capabilities. Added comprehensive monitoring with custom dashboards.",
-    tech: ["Next.js", "React", "Node.js", "Express", "MongoDB", "Redis", "Socket.io", "Elasticsearch", "JWT", "Docker"],
-    database: "MongoDB cluster with sharding for horizontal scaling, Redis for caching and session storage, Elasticsearch for full-text search with relevance scoring",
-    deployment: "Kubernetes cluster on AWS with auto-scaling, CDN via CloudFlare, comprehensive monitoring with DataDog, automated CI/CD pipelines with GitHub Actions"
+    description: "Next.js frontend with Node.js/Express backend and MongoDB. Used Redis for caching and Socket.io for real-time features. Implemented JWT authentication and comprehensive monitoring.",
+    tech: ["Next.js", "React", "Node.js", "Express", "MongoDB", "Redis", "Socket.io", "JWT"],
+    database: "MongoDB with proper indexing, Redis for caching and session management",
+    deployment: "Vercel for frontend, AWS for backend services, CloudFlare CDN, automated CI/CD with GitHub Actions"
   },
   keyFeatures: [
     {
-      title: "Enterprise Real-time Suite",
-      description: "Advanced messaging with channels, threads, file sharing, video calls integration, and message encryption. Supports 10,000+ concurrent users with sub-50ms message delivery and full message history search.",
+      title: "Real-time Messaging",
+      description: "Team chat with channels, threads, and file sharing. Supports 100+ concurrent users with fast message delivery and search functionality.",
       icon: <FiMessageCircle />
     },
     {
-      title: "Intelligent Project Management",
-      description: "AI-powered task prioritization, automated sprint planning, resource allocation algorithms, and predictive deadline tracking. Integrates with GitHub, Jira, and external APIs for seamless workflow.",
+      title: "Project Management",
+      description: "Task tracking, sprint planning, and deadline management. Integrates with GitHub for seamless workflow and progress tracking.",
       icon: <FiBarChart />
     },
     {
-      title: "Advanced Analytics Engine",
-      description: "Real-time team performance metrics, burn rate analysis, productivity patterns, and automated insights. Custom dashboards with drill-down capabilities and executive reporting.",
+      title: "Team Analytics",
+      description: "Performance metrics, productivity tracking, and custom dashboards. Provides insights into team velocity and project health.",
       icon: <FiBarChart />
     },
     {
-      title: "Enterprise Security Suite",
-      description: "SSO integration (SAML, OAuth), role-based access control, audit trails, data encryption at rest/transit, and GDPR compliance. Automated security scanning and vulnerability management.",
+      title: "Security & Permissions",
+      description: "Role-based access control, SSO integration, and data encryption. Ensures secure collaboration with audit trails.",
       icon: <FiShield />
     }
   ],
   challenges: [
     {
-      title: "Horizontal Scaling Architecture",
-      description: "Designing system to handle 10,000+ concurrent users with 99.9% uptime while maintaining sub-50ms response times across multiple geographic regions.",
-      solution: "Implemented microservices with Docker containers, Kubernetes orchestration with auto-scaling, Redis clustering for session management, and MongoDB sharding with automated failover. Added comprehensive load testing and monitoring."
+      title: "Real-time Performance",
+      description: "Ensuring fast message delivery and smooth collaboration features as team usage grew.",
+      solution: "Optimized database queries, implemented Redis caching, and used Socket.io efficiently. Added monitoring and load testing."
     },
     {
-      title: "Real-time Conflict Resolution",
-      description: "Managing concurrent edits, optimistic updates, and conflict resolution across multiple users while maintaining data consistency and preventing race conditions.",
-      solution: "Built operational transformation algorithm for collaborative editing, implemented event sourcing with CQRS pattern, added distributed locking mechanisms, and created comprehensive conflict resolution strategies."
+      title: "Data Consistency",
+      description: "Managing concurrent updates and preventing conflicts when multiple users edit project data simultaneously.",
+      solution: "Implemented proper locking mechanisms and conflict resolution strategies. Used database transactions and optimistic updates."
     },
     {
-      title: "Enterprise Security Compliance",
-      description: "Meeting SOC 2 Type II, GDPR, and HIPAA compliance requirements while maintaining performance and user experience for enterprise clients.",
-      solution: "Implemented end-to-end encryption, comprehensive audit logging, automated security scanning, penetration testing, and achieved SOC 2 Type II certification. Built compliance reporting tools and data governance frameworks."
+      title: "Security Implementation",
+      description: "Balancing security requirements with user experience while implementing authentication and permissions.",
+      solution: "Used JWT for authentication, implemented role-based access control, and added comprehensive input validation and security headers."
     }
   ],
   results: [
     {
       metric: "System Uptime",
-      value: "99.9%",
+      value: "99.5%",
       icon: <FiZap />
     },
     {
-      metric: "Concurrent Users",
-      value: "10,000+",
+      metric: "Active Users",
+      value: "150+",
       icon: <FiUsers />
     },
     {
       metric: "Message Latency",
-      value: "<50ms",
+      value: "<200ms",
       icon: <FiTrendingUp />
     },
     {
-      metric: "Productivity Gain",
-      value: "65% faster",
+      metric: "Team Efficiency",
+      value: "+35%",
       icon: <FiBarChart />
     }
   ],
   lessons: [
-    "Enterprise architecture requires planning for 100x scale from day one - horizontal scaling isn't an afterthought",
-    "Real-time collaborative features need sophisticated conflict resolution - optimistic updates alone aren't sufficient",
-    "Security compliance (SOC 2, GDPR) adds significant complexity but is essential for enterprise adoption",
-    "Microservices architecture improves scalability but introduces distributed system challenges that need robust solutions",
-    "Performance monitoring and observability are critical for maintaining SLAs in production environments"
+    "Real-time features require careful architecture - caching and optimization are crucial for good performance",
+    "Security should be built from the start, not added later - authentication and permissions affect the entire system",
+    "User experience matters as much as features - simplicity often beats complexity in collaboration tools",
+    "Monitoring and testing are essential for maintaining reliability as usage grows",
+    "Good database design impacts everything - proper indexing and query optimization prevent performance issues"
   ],
   links: {
     github: "https://github.com/saad-abbasi07/TeamFlow-Collaboration-Platform",
@@ -131,84 +131,84 @@ export const ecommerceCaseStudy: CaseStudyData = {
   title: "ScaleCommerce Pro Platform",
   heroImage: "/images/projects_images/e-store.png",
   overview: {
-    problem: "Mid-market retailers ($1M-$10M revenue) struggled with Shopify's transaction fees (2.9% + 30¢) and limited customization options. Enterprise solutions like Salesforce Commerce were prohibitively expensive ($2K+/month) and required dedicated IT teams.",
-    solution: "Built a scalable e-commerce platform with advanced features including AI-powered recommendations, multi-channel inventory management, and comprehensive analytics. Reduced transaction costs to 1.5% while providing enterprise-grade features at $299/month.",
-    timeline: "6 months (Full-time development)",
+    problem: "Small businesses struggled with high transaction fees from platforms like Shopify and limited customization options for their specific needs.",
+    solution: "Built a flexible e-commerce platform with lower fees and customizable features. Focused on ease of use while providing essential business tools.",
+    timeline: "3 months (Full-time development)",
     role: "Full Stack Developer & Tech Lead"
   },
   architecture: {
-    description: "Headless commerce architecture with Next.js frontend, Node.js microservices backend, and PostgreSQL primary database. Implemented Redis for caching and session management, Elasticsearch for product search, and integrated multiple payment gateways. Added CDN optimization and image processing pipeline.",
-    tech: ["Next.js", "React", "Node.js", "PostgreSQL", "Redis", "Elasticsearch", "Stripe", "PayPal", "AWS S3", "CloudFlare CDN"],
-    database: "PostgreSQL with read replicas for high availability, Redis cluster for caching, Elasticsearch for search analytics, automated backups with point-in-time recovery",
-    deployment: "AWS ECS with auto-scaling, CloudFlare CDN for global content delivery, RDS PostgreSQL with Multi-AZ deployment, comprehensive monitoring with New Relic"
+    description: "Next.js frontend with Node.js backend and PostgreSQL database. Used Redis for caching and integrated Stripe for payments. Added CDN for fast content delivery.",
+    tech: ["Next.js", "React", "Node.js", "PostgreSQL", "Redis", "Stripe", "AWS S3"],
+    database: "PostgreSQL with proper indexing, Redis for caching and session management",
+    deployment: "Vercel for frontend, AWS for backend services, CloudFlare CDN, automated backups"
   },
   keyFeatures: [
     {
-      title: "AI-Powered Commerce Engine",
-      description: "Machine learning recommendations, dynamic pricing optimization, personalized shopping experiences, and predictive inventory management. Real-time A/B testing and conversion rate optimization.",
+      title: "Product Management",
+      description: "Easy product catalog management with categories, variants, and inventory tracking. Bulk upload and automated stock management.",
       icon: <FiShoppingBag />
     },
     {
-      title: "Multi-Channel Management",
-      description: "Unified inventory across website, mobile app, social media, and marketplaces. Automated order routing, real-time stock synchronization, and centralized customer service tools.",
+      title: "Shopping Cart & Checkout",
+      description: "Smooth shopping experience with saved carts, guest checkout, and multiple payment options including Stripe integration.",
       icon: <FiPackage />
     },
     {
-      title: "Advanced Analytics Suite",
-      description: "Real-time sales analytics, customer behavior tracking, cohort analysis, and predictive revenue forecasting. Custom dashboards with drill-down capabilities and automated insights.",
+      title: "Order Management",
+      description: "Complete order tracking, shipping management, and customer notifications. Automated email updates and status tracking.",
       icon: <FiBarChart />
     },
     {
-      title: "Enterprise Payment Gateway",
-      description: "Multi-payment processor support (Stripe, PayPal, Apple Pay), advanced fraud detection, subscription billing, and automated tax calculation. PCI DSS compliant with tokenization.",
+      title: "Payment Processing",
+      description: "Secure payment processing with Stripe, support for multiple currencies, and automated fraud detection.",
       icon: <FiShield />
     }
   ],
   challenges: [
     {
-      title: "High-Volume Transaction Processing",
-      description: "Handling 10,000+ concurrent transactions during peak shopping seasons while maintaining 99.99% uptime and preventing inventory overselling across multiple channels.",
-      solution: "Implemented distributed transaction management with PostgreSQL, Redis-based inventory locking, message queue for order processing, and comprehensive circuit breakers. Added load testing to 50,000 concurrent users."
+      title: "Payment Integration",
+      description: "Implementing secure payment processing while handling various edge cases and ensuring compliance.",
+      solution: "Used Stripe for secure payments, implemented proper error handling, and added comprehensive logging and monitoring."
     },
     {
-      title: "AI Recommendation Engine Performance",
-      description: "Building real-time ML recommendations that respond within 100ms while processing millions of product interactions and maintaining accuracy across diverse product catalogs.",
-      solution: "Implemented collaborative filtering with TensorFlow.js, Redis for pre-computed recommendations, real-time personalization algorithms, and A/B testing framework. Achieved 35% click-through rate improvement."
+      title: "Inventory Management",
+      description: "Preventing overselling and maintaining accurate stock levels across multiple concurrent orders.",
+      solution: "Implemented database transactions and proper locking mechanisms. Added real-time stock updates and low-stock alerts."
     },
     {
-      title: "Multi-Channel Inventory Synchronization",
-      description: "Maintaining real-time inventory consistency across website, mobile app, social media, and marketplaces with sub-second sync times and conflict resolution.",
-      solution: "Built event-driven architecture with Kafka, implemented eventual consistency patterns, added conflict resolution algorithms, and created comprehensive audit trails. Reduced sync time to 200ms."
+      title: "Performance Optimization",
+      description: "Ensuring fast page loads and smooth checkout experience as product catalog grew.",
+      solution: "Optimized database queries, implemented Redis caching, and used CDN for images. Added lazy loading and compression."
     }
   ],
   results: [
     {
       metric: "System Uptime",
-      value: "99.99%",
+      value: "99.8%",
       icon: <FiZap />
     },
     {
       metric: "Conversion Rate",
-      value: "4.8%",
+      value: "3.2%",
       icon: <FiShoppingBag />
     },
     {
-      metric: "Mobile Performance",
-      value: "98/100",
+      metric: "Page Speed",
+      value: "<2s",
       icon: <FiSmartphone />
     },
     {
-      metric: "Revenue Growth",
-      value: "+180%",
+      metric: "Sales Growth",
+      value: "+45%",
       icon: <FiPackage />
     }
   ],
   lessons: [
-    "E-commerce at scale requires treating inventory as a distributed system problem - eventual consistency patterns are essential",
-    "ML recommendations need both accuracy and speed - pre-computation and caching are as important as algorithm quality",
-    "Payment processing security is non-negotiable - PCI compliance requires ongoing investment and expertise",
-    "Performance optimization is continuous - every 100ms improvement directly impacts conversion rates and revenue",
-    "Multi-channel inventory management is fundamentally a data synchronization challenge - event-driven architectures provide the best solution"
+    "Payment processing requires careful error handling - failed transactions need clear user feedback",
+    "Inventory management is critical - overselling damages customer trust and business reputation",
+    "Performance directly impacts sales - every second of load time costs conversions",
+    "Security is non-negotiable in e-commerce - PCI compliance and data protection are essential",
+    "User experience matters most - simple checkout processes dramatically improve conversion rates"
   ],
   links: {
     github: "https://github.com/saad-abbasi07/ecommerce-estore-nextjs",

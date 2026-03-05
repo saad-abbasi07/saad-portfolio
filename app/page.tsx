@@ -7,12 +7,20 @@ import {
   FiLayers, FiPieChart, FiMap, FiCheck,
   FiMail, FiPhone, FiMapPin, FiGithub, FiExternalLink, FiBookOpen, FiBriefcase, FiCode, FiZap
 } from 'react-icons/fi';
+import { 
+  SiReact, SiNextdotjs, SiNodedotjs, SiExpress, 
+  SiMongodb, SiPostgresql, SiPython, SiTensorflow,
+  SiTailwindcss, SiGit, SiDocker, SiAmazon,
+  SiVercel, SiNetlify, SiJavascript, SiTypescript,
+  SiScikitlearn, SiNumpy, SiPandas, SiOpencv
+} from 'react-icons/si';
 import { ReactNode } from 'react';
 import SectionHeader from './components/ui/SectionHeader';
 import StatCard from './components/ui/StatCard';
 import ProjectCaseStudy from './components/ui/ProjectCaseStudy';
 import CommandPalette from './components/ui/CommandPalette';
 import ScrollProgress from './components/ui/ScrollProgress';
+import SkillBar from './components/ui/SkillBar';
 import { teamFlowCaseStudy, ecommerceCaseStudy } from './components/data/caseStudies';
 import ProjectCard from './components/ui/ProjectCard';
 import ContactInfo from './components/ui/ContactInfo';
@@ -75,7 +83,7 @@ const slides = [
     title: "Hi!",
     subtitle: "I'm Saad",
     highlight: "Full Stack Software Engineer",
-    description: "Full Stack Software Engineer & Machine Learning Developer. I build responsive products and smart solutions.",
+    description: "I design full-stack web apps and ML solutions that help businesses increase efficiency and scale. Built 10+ live projects with 1000+ users.",
     buttonText: "Download My CV",
     image: "/images/main_images/Creatix.jpg",
     action: "cv"
@@ -379,20 +387,20 @@ export default function Page() {
         {slides.map((slide, index) => (
           <div key={slide.id} className={`absolute inset-0 transition-all duration-1000 flex items-center ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
             <div className="container mx-auto h-full flex items-center px-8 sm:px-12 md:px-16 lg:px-24">
-              <div className={`max-w-2xl z-30 p-6 md:p-0 rounded-lg ${
-                theme === 'dark' ? 'bg-gray-800/70 md:bg-transparent' : 'bg-white/70 md:bg-transparent'
-              }`}>
-                <h2 className="text-[#A855F7] font-black tracking-[3px] text-[12px] mb-6 uppercase">{slide.highlight}</h2>
-                <h1 className={`text-[40px] sm:text-[70px] lg:text-[90px] font-serif font-black leading-[1.05] mb-8 ${
+              <div className={`max-w-2xl z-30 p-4 sm:p-6 md:p-0 rounded-lg ${
+              theme === 'dark' ? 'bg-gray-800/70 md:bg-transparent' : 'bg-white/70 md:bg-transparent'
+            }`}>
+                <h2 className="text-[#A855F7] font-black tracking-[2px] text-[10px] sm:text-[12px] mb-4 sm:mb-6 uppercase">{slide.highlight}</h2>
+                <h1 className={`text-[28px] sm:text-[50px] lg:text-[70px] xl:text-[90px] font-serif font-black leading-[1.05] mb-6 sm:mb-8 ${
                   theme === 'dark' ? 'text-white' : 'text-[#A855F7]'
                 }`}>
                   {slide.title} <br /> <span className="text-[#A855F7] font-black">{slide.subtitle}</span>
                 </h1>
-                <p className={`text-[15px] md:text-[16px] leading-relaxed mb-10 border-l-4 border-[#A855F7] pl-6 max-w-lg font-medium ${
+                <p className={`text-[13px] sm:text-[15px] md:text-[16px] leading-relaxed mb-8 sm:mb-10 border-l-4 border-[#A855F7] pl-4 sm:pl-6 max-w-lg font-medium ${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
                 }`}>{slide.description}</p>
                 <button 
-                  className={`px-8 py-4 uppercase tracking-widest text-[11px] font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[48px] bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 ${
+                  className={`w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 uppercase tracking-widest text-[10px] sm:text-[11px] font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[44px] sm:min-h-[48px] bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 ${
                     theme === 'dark' ? 'shadow-purple-500/25' : 'shadow-purple-500/20'
                   }`}
                   onClick={() => {
@@ -416,8 +424,10 @@ export default function Page() {
                   fill 
                   className="object-cover object-center md:object-right" 
                   priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={80}
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 60vw, 50vw"
+                  quality={85}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8A8A"
                 />
                 <div className={`absolute inset-0 ${
                   theme === 'dark' ? 'bg-gray-800/20 md:bg-transparent md:bg-gradient-to-r md:from-gray-900/80' : 'bg-white/20 md:bg-transparent md:bg-gradient-to-r md:from-white/80'
@@ -506,7 +516,7 @@ export default function Page() {
           >
             <SectionHeader subtitle="Services" title="What I Offer" />
           </motion.div>
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -556,10 +566,64 @@ export default function Page() {
               <h3 className={`text-2xl font-black text-blue-500 dark:text-blue-400 uppercase tracking-wider`}>Web Development</h3>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <SkillBar skill="MongoDB / Express.js" percentage={92} color="bg-blue-500" />
-              <SkillBar skill="React / Node.js" percentage={90} color="bg-blue-500" />
-              <SkillBar skill="Next.js / TypeScript" percentage={88} color="bg-blue-500" />
-              <SkillBar skill="Tailwind CSS / REST APIs" percentage={90} color="bg-blue-500" />
+              <SkillBar 
+                skill="React" 
+                percentage={92} 
+                color="bg-blue-500" 
+                icon={<SiReact className="text-blue-400" />}
+                projects={[
+                  { title: "TeamFlow", link: "https://team-flow-collaboration-platform.vercel.app/" },
+                  { title: "Ecommerce Store", link: "https://ecommerce-estore-nextjs.vercel.app/" }
+                ]}
+              />
+              <SkillBar 
+                skill="Next.js" 
+                percentage={90} 
+                color="bg-blue-500" 
+                icon={<SiNextdotjs className="text-gray-800 dark:text-white" />}
+                projects={[
+                  { title: "Ecommerce Store", link: "https://ecommerce-estore-nextjs.vercel.app/" },
+                  { title: "Portfolio", link: "#" }
+                ]}
+              />
+              <SkillBar 
+                skill="Node.js / Express" 
+                percentage={88} 
+                color="bg-blue-500" 
+                icon={<SiNodedotjs className="text-green-500" />}
+                projects={[
+                  { title: "TeamFlow", link: "https://team-flow-collaboration-platform.vercel.app/" },
+                  { title: "ConnectHub", link: "https://github.com/saad-abbasi07/ConnectHub" }
+                ]}
+              />
+              <SkillBar 
+                skill="MongoDB" 
+                percentage={90} 
+                color="bg-blue-500" 
+                icon={<SiMongodb className="text-green-600" />}
+                projects={[
+                  { title: "TeamFlow", link: "https://team-flow-collaboration-platform.vercel.app/" },
+                  { title: "MERN Chat App", link: "https://github.com/saad-abbasi07/mern-chat-app" }
+                ]}
+              />
+              <SkillBar 
+                skill="Tailwind CSS" 
+                percentage={92} 
+                color="bg-blue-500" 
+                icon={<SiTailwindcss className="text-cyan-500" />}
+                projects={[
+                  { title: "All Projects", link: "#work" }
+                ]}
+              />
+              <SkillBar 
+                skill="TypeScript" 
+                percentage={85} 
+                color="bg-blue-500" 
+                icon={<SiTypescript className="text-blue-600" />}
+                projects={[
+                  { title: "fb-mini-app", link: "https://github.com/saad-abbasi07/fb-mini-app" }
+                ]}
+              />
             </div>
           </motion.div>
 
@@ -578,10 +642,62 @@ export default function Page() {
               <h3 className={`text-2xl font-black text-red-500 dark:text-red-400 uppercase tracking-wider`}>Machine Learning</h3>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <SkillBar skill="Python / ML (TensorFlow)" percentage={85} color="bg-red-500" />
-              <SkillBar skill="Data Analysis (Pandas/NumPy)" percentage={82} color="bg-red-500" />
-              <SkillBar skill="Deep Learning (Neural Networks)" percentage={78} color="bg-red-500" />
-              <SkillBar skill="Computer Vision (OpenCV)" percentage={75} color="bg-red-500" />
+              <SkillBar 
+                skill="Python" 
+                percentage={90} 
+                color="bg-red-500" 
+                icon={<SiPython className="text-blue-500" />}
+                projects={[
+                  { title: "Fake News Detector", link: "https://fake-news-detector-jxa6exrhjknrxcfncdxyro.streamlit.app/" },
+                  { title: "Stock Predictor", link: "https://stock-price-predictor-xbhm.vercel.app/" }
+                ]}
+              />
+              <SkillBar 
+                skill="TensorFlow" 
+                percentage={82} 
+                color="bg-red-500" 
+                icon={<SiTensorflow className="text-orange-500" />}
+                projects={[
+                  { title: "Stock Predictor", link: "https://stock-price-predictor-xbhm.vercel.app/" }
+                ]}
+              />
+              <SkillBar 
+                skill="Scikit-learn" 
+                percentage={85} 
+                color="bg-red-500" 
+                icon={<SiScikitlearn className="text-orange-600" />}
+                projects={[
+                  { title: "Fake News Detector", link: "https://fake-news-detector-jxa6exrhjknrxcfncdxyro.streamlit.app/" },
+                  { title: "Loan Approval ML", link: "https://github.com/saad-abbasi07/loan-approval-ml-model" }
+                ]}
+              />
+              <SkillBar 
+                skill="Pandas / NumPy" 
+                percentage={88} 
+                color="bg-red-500" 
+                icon={<SiPandas className="text-blue-600" />}
+                projects={[
+                  { title: "SmartSpend-AI", link: "https://github.com/saad-abbasi07/SmartSpend-AI" }
+                ]}
+              />
+              <SkillBar 
+                skill="OpenCV" 
+                percentage={75} 
+                color="bg-red-500" 
+                icon={<SiOpencv className="text-green-600" />}
+                projects={[
+                  { title: "Computer Vision Projects", link: "#" }
+                ]}
+              />
+              <SkillBar 
+                skill="Data Analysis" 
+                percentage={87} 
+                color="bg-red-500" 
+                icon={<FiCpu className="text-red-400" />}
+                projects={[
+                  { title: "All ML Projects", link: "#work" }
+                ]}
+              />
             </div>
           </motion.div>
 
@@ -599,10 +715,60 @@ export default function Page() {
               <h3 className={`text-2xl font-black text-amber-500 dark:text-amber-400 uppercase tracking-wider`}>Deployment & DevOps</h3>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <SkillBar skill="Vercel / Netlify" percentage={88} color="bg-amber-500" />
-              <SkillBar skill="Git / GitHub" percentage={92} color="bg-amber-500" />
-              <SkillBar skill="Docker / CI/CD" percentage={76} color="bg-amber-500" />
-              <SkillBar skill="Cloud Services (AWS/Azure)" percentage={70} color="bg-amber-500" />
+              <SkillBar 
+                skill="Vercel" 
+                percentage={92} 
+                color="bg-amber-500" 
+                icon={<SiVercel className="text-black" />}
+                projects={[
+                  { title: "All Next.js Projects", link: "#work" }
+                ]}
+              />
+              <SkillBar 
+                skill="Git / GitHub" 
+                percentage={95} 
+                color="bg-amber-500" 
+                icon={<SiGit className="text-orange-600" />}
+                projects={[
+                  { title: "All Projects", link: "https://github.com/saad-abbasi07" }
+                ]}
+              />
+              <SkillBar 
+                skill="Docker" 
+                percentage={78} 
+                color="bg-amber-500" 
+                icon={<SiDocker className="text-blue-500" />}
+                projects={[
+                  { title: "TeamFlow Backend", link: "https://github.com/saad-abbasi07/TeamFlow-Collaboration-Platform" }
+                ]}
+              />
+              <SkillBar 
+                skill="AWS" 
+                percentage={72} 
+                color="bg-amber-500" 
+                icon={<SiAmazon className="text-orange-500" />}
+                projects={[
+                  { title: "Cloud Deployments", link: "#" }
+                ]}
+              />
+              <SkillBar 
+                skill="Netlify" 
+                percentage={85} 
+                color="bg-amber-500" 
+                icon={<SiNetlify className="text-cyan-500" />}
+                projects={[
+                  { title: "React Projects", link: "#work" }
+                ]}
+              />
+              <SkillBar 
+                skill="CI/CD" 
+                percentage={80} 
+                color="bg-amber-500" 
+                icon={<FiZap className="text-amber-400" />}
+                projects={[
+                  { title: "Automated Deployments", link: "#" }
+                ]}
+              />
             </div>
           </motion.div>
         </div>
@@ -719,21 +885,71 @@ export default function Page() {
         theme === 'dark' ? 'bg-gray-900' : 'bg-white'
       }`}>
         <div className="max-w-6xl">
-          <SectionHeader subtitle="Connect" title="Contact Me" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <SectionHeader subtitle="Let's Connect" title="Ready to Build Something Amazing?" />
+            <p className={`text-center max-w-2xl mx-auto mb-12 text-lg ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}>
+              Whether you have a project in mind, want to collaborate, or just want to chat about technology - I'm always excited to connect with fellow developers and innovative thinkers.
+            </p>
+          </motion.div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="space-y-6">
-                <ContactInfo icon={<FiMail />} label="07saadabbasi@gmail.com" />
-                <ContactInfo icon={<FiPhone />} label="+92 327 6491461" />
-                <ContactInfo icon={<FiMapPin />} label="Abbottabad, Pakistan" />
-            </div>
-            <form className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
+            <motion.div 
+              className="space-y-6"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className={`p-6 rounded-xl ${
+                theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+              }`}>
+                <h3 className={`text-lg font-bold mb-4 ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>Get in Touch</h3>
+                <div className="space-y-4">
+                  <ContactInfo icon={<FiMail />} label="07saadabbasi@gmail.com" />
+                  <ContactInfo icon={<FiPhone />} label="+92 327 6491461" />
+                  <ContactInfo icon={<FiMapPin />} label="Abbottabad, Pakistan" />
+                </div>
+              </div>
+              
+              <div className={`p-6 rounded-xl ${
+                theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+              }`}>
+                <h3 className={`text-lg font-bold mb-3 ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>Let's Collaborate</h3>
+                <p className={`text-sm ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  Open to freelance projects, full-time opportunities, and exciting collaborations. Let's create something remarkable together!
+                </p>
+              </div>
+            </motion.div>
+            
+            <motion.form 
+              className="lg:col-span-2 space-y-6" 
+              onSubmit={handleSubmit}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input 
                   type="text" 
                   name="name"
-                  placeholder="Name" 
+                  placeholder="Your Name *" 
                   value={formData.name}
                   onChange={handleInputChange}
-                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] min-h-[48px] ${
+                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] min-h-[56px] rounded-lg transition-all ${
                     theme === 'dark' 
                       ? 'bg-gray-800 text-white border-gray-600' 
                       : 'bg-[#f2f3f7] text-black'
@@ -743,39 +959,58 @@ export default function Page() {
                 <input 
                   type="email" 
                   name="email"
-                  placeholder="Email" 
+                  placeholder="Your Email *" 
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] min-h-[48px] ${
+                  className={`p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] min-h-[56px] rounded-lg transition-all ${
                     theme === 'dark' 
                       ? 'bg-gray-800 text-white border-gray-600' 
                       : 'bg-[#f2f3f7] text-black'
                   }`} 
                   required
                 />
-                <textarea 
-                  name="message"
-                  placeholder="Message" 
-                  rows={5} 
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className={`md:col-span-2 p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] ${
-                    theme === 'dark' 
-                      ? 'bg-gray-800 text-white border-gray-600' 
-                      : 'bg-[#f2f3f7] text-black'
-                  }`}
-                  required
-                ></textarea>
+              </div>
+              <textarea 
+                name="message"
+                placeholder="Tell me about your project or idea..." 
+                rows={6} 
+                value={formData.message}
+                onChange={handleInputChange}
+                className={`w-full p-4 outline-none text-sm focus:ring-2 focus:ring-[#A855F7] rounded-lg transition-all resize-none ${
+                  theme === 'dark' 
+                    ? 'bg-gray-800 text-white border-gray-600' 
+                    : 'bg-[#f2f3f7] text-black'
+                }`}
+                required
+              ></textarea>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
                 <button 
                   type="submit"
                   disabled={formStatus === 'loading'}
-                  className={`px-8 py-4 uppercase tracking-widest text-[11px] font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[48px] bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed disabled:hover:scale-100 self-start ${
+                  className={`px-8 py-4 text-sm font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[56px] rounded-lg bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed disabled:hover:scale-100 flex-1 sm:flex-none ${
                     theme === 'dark' ? 'shadow-purple-500/25' : 'shadow-purple-500/20'
                   }`}
                 >
-                  {formStatus === 'loading' ? 'Sending...' : 'Send Message'}
+                  {formStatus === 'loading' ? 'Sending Message...' : 'Send Message'}
                 </button>
-            </form>
+                
+                <a
+                  href="mailto:07saadabbasi@gmail.com?subject=Project%20Inquiry&body=Hi%20Saad,%20I'd%20love%20to%20discuss%20a%20project%20with%20you!"
+                  className={`px-8 py-4 text-sm font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[56px] rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 flex-1 sm:flex-none text-center ${
+                    theme === 'dark' ? 'shadow-blue-500/25' : 'shadow-blue-500/20'
+                  }`}
+                >
+                  Quick Email
+                </a>
+              </div>
+              
+              <p className={`text-xs text-center ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              }`}>
+                I typically respond within 24 hours. Let's build something amazing together!
+              </p>
+            </motion.form>
           </div>
         </div>
       </section>
@@ -901,29 +1136,6 @@ const ServiceItem = ({ icon, title, desc }: ServiceItemProps) => {
       <p className={`text-[13px] sm:text-[14px] leading-relaxed font-medium ${
         theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
       }`}>{desc}</p>
-    </div>
-  );
-};
-
-const SkillBar = ({ skill, percentage, color }: SkillBarProps) => {
-  const { theme } = useTheme();
-  return (
-    <div className="w-full mb-6">
-      <div className="flex justify-between items-center mb-3">
-        <span className={`text-[14px] font-semibold uppercase tracking-wider ${
-          theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
-        }`}>{skill}</span>
-        <span className={`text-[16px] font-bold ${
-          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-        }`}>{percentage}%</span>
-      </div>
-      <div className={`w-full h-[8px] rounded-full overflow-hidden shadow-inner ${
-        theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200'
-      }`}>
-        <div className={`h-full ${color} transition-all duration-1000 ease-out relative`} style={{ width: `${percentage}%` }}>
-          <div className="absolute inset-0 bg-white/20 rounded-full blur-sm"></div>
-        </div>
-      </div>
     </div>
   );
 };

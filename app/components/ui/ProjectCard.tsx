@@ -61,9 +61,9 @@ export default function ProjectCard({ project, color, onCaseStudy, specialWidth 
           alt={project.title} 
           fill 
           className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
           loading="lazy"
-          quality={75}
+          quality={80}
           placeholder="blur"
           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8A8A"
         />
@@ -75,17 +75,17 @@ export default function ProjectCard({ project, color, onCaseStudy, specialWidth 
           </div>
         </div>
       </div>
-      <div className="p-6 space-y-3 flex flex-col flex-grow">
-        <h3 className={`text-lg sm:text-xl font-bold tracking-tight uppercase ${
+      <div className="p-4 sm:p-6 space-y-3 flex flex-col flex-grow">
+        <h3 className={`text-base sm:text-lg xl:text-xl font-bold tracking-tight uppercase ${
           theme === 'dark' ? 'text-white' : 'text-gray-900'
         }`}>{project.title}</h3>
-        <p className={`text-sm leading-relaxed flex-grow ${
+        <p className={`text-xs sm:text-sm leading-relaxed flex-grow ${
           theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
         }`}>{project.description}</p>
         <div className="mt-auto">
-          <div className="flex flex-wrap gap-2 mt-3">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-3">
             {project.technologies.map((tech: string, idx: number) => (
-              <span key={idx} className={`px-2 py-1 text-xs font-medium rounded ${
+              <span key={idx} className={`px-2 py-1 text-[10px] sm:text-xs font-medium rounded ${
                 isBlue 
                   ? theme === 'dark' ? 'bg-blue-500/10 text-blue-400' : 'bg-blue-500/5 text-blue-600'
                   : theme === 'dark' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-emerald-500/5 text-emerald-600'
@@ -94,11 +94,11 @@ export default function ProjectCard({ project, color, onCaseStudy, specialWidth 
               </span>
             ))}
           </div>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap mt-3 sm:mt-4">
             {onCaseStudy && (project.title === "TeamFlow Collaboration Platform" || project.title === "Ecommerce Estore NextJS") && (
               <button
                 onClick={() => onCaseStudy(project.title)}
-                className="inline-flex items-center gap-2 px-4 py-3 text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 shadow-md hover:shadow-lg min-h-[44px]"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 shadow-md hover:shadow-lg min-h-[40px] sm:min-h-[44px]"
               >
                 <span className="hidden sm:inline">Case Study</span>
                 <span className="sm:hidden">Study</span>
@@ -108,13 +108,13 @@ export default function ProjectCard({ project, color, onCaseStudy, specialWidth 
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 min-h-[44px] ${
+              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 min-h-[40px] sm:min-h-[44px] ${
                 isBlue 
                   ? 'text-blue-400 hover:text-blue-300'
                   : theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-700'
               }`}
             >
-              <FiGithub className="text-sm" />
+              <FiGithub className="text-xs sm:text-sm" />
               <span className="hidden sm:inline">GitHub</span>
               <span className="sm:hidden">Code</span>
             </a>
@@ -123,7 +123,7 @@ export default function ProjectCard({ project, color, onCaseStudy, specialWidth 
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3 text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 shadow-md hover:shadow-lg min-h-[44px]"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 shadow-md hover:shadow-lg min-h-[40px] sm:min-h-[44px]"
               >
                 <span className="hidden sm:inline">Live Demo</span>
                 <span className="sm:hidden">Demo</span>

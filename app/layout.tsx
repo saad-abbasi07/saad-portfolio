@@ -14,20 +14,41 @@ export const metadata: Metadata = {
     description: 'Portfolio showcasing web development and machine learning projects',
     type: 'website',
     locale: 'en_US',
+    images: [
+      {
+        url: '/images/main_images/Creatix.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Saad Abbasi - Full Stack Developer',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Saad Abbasi - Full Stack Developer',
     description: 'Portfolio of a Full Stack Developer & Machine Learning Engineer',
+    images: ['/images/main_images/Creatix.jpg'],
   },
   robots: {
     index: true,
     follow: true,
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
   },
+  verification: {
+    google: 'your-google-verification-code',
+  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#A855F7',
 };
 
 const quicksand = Quicksand({ 
