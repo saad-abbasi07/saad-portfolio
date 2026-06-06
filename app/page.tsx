@@ -266,25 +266,32 @@ export default function Page() {
   // Certificates data
   const certificates = [
     {
-      id: 'sololearn',
-      title: 'Full-Stack Development',
-      issuer: 'Sololearn',
-      date: '2024',
-      imagePath: '/certificates/certification_sololearn.jpg'
-    },
-    {
-      id: 'nexelix',
-      title: 'Professional Certification',
-      issuer: 'Nexelix',
-      date: '2024',
-      imagePath: '/certificates/certification_nexelix.jpeg'
+      id: 'ai-ml',
+      title: 'AI-ML Engineering',
+      issuer: 'Various',
+      date: '2026',
+      imagePath: '/certificates/AI-ML-Enginnering_page.jpg'
     },
     {
       id: 'teaching',
-      title: 'Teaching Excellence Certificate',
-      issuer: 'Digital Dream',
-      date: '2026',
+      title: 'Teaching Certificate',
+      issuer: 'Various',
+      date: '2025',
       imagePath: '/certificates/Teaching_Certificate.jpg'
+    },
+    {
+      id: 'nexelix',
+      title: 'Nexelix Certification',
+      issuer: 'Nexelix Solutions',
+      date: '2026',
+      imagePath: '/certificates/certification_nexelix.jpeg'
+    },
+    {
+      id: 'sololearn',
+      title: 'SoloLearn Certification',
+      issuer: 'SoloLearn',
+      date: '2025',
+      imagePath: '/certificates/certification_sololearn.jpg'
     }
   ];
 
@@ -1097,6 +1104,13 @@ export default function Page() {
       <CommandPalette
         isOpen={isCommandPaletteOpen}
         onClose={() => setIsCommandPaletteOpen(false)}
+      />
+
+      {/* Certificate Viewer */}
+      <CertificateViewer
+        isOpen={isCertificateViewerOpen}
+        onClose={() => setIsCertificateViewerOpen(false)}
+        certificates={certificates}
       />
 
     </div>
