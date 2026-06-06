@@ -405,7 +405,7 @@ export default function Page() {
                   }`}
                   onClick={() => {
                     if (slide.action === "cv") {
-                      window.open('/myResume/Saad-Abbasi-Resume.pdf', '_blank');
+                      window.open('/myResume/Saad-Abbasi.pdf', '_blank');
                     } else if (slide.action === "work") {
                       document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
                     } else if (slide.action === "certification") {
