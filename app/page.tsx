@@ -820,6 +820,13 @@ export default function Page() {
               sub="Freelance" 
               desc="Training deep learning models for computer vision and analyzing datasets with Python, Pandas, and NumPy." 
             />
+            <TimelineItem 
+              icon={<FiBriefcase className="bg-purple-600 text-white"/>} 
+              date="April 13, 2026 - May 25, 2026" 
+              title="AI / ML Engineering Intern - Best Award" 
+              sub="DevelopersHub Corporation" 
+              desc="Successfully completed a 6-Week Internship Program in AI/ML Engineering with exceptional performance. Recognized with the Best Award (DHC-471) for outstanding skills and significant contributions demonstrated throughout the internship period." 
+            />
           </div>
         </div>
       </section>
