@@ -123,7 +123,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
       description: 'Download resume PDF',
       icon: <FiDownload />,
       action: () => {
-        window.open('/myResume/Saad-Abbasi.pdf', '_blank');
+        window.open('/myResume/Saad-Abbasi-Resume.pdf', '_blank');
         onClose();
       },
       category: 'actions',

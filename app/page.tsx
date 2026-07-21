@@ -85,7 +85,7 @@ const slides = [
     highlight: "Full Stack Software Engineer",
     description: "I design full-stack web apps and ML solutions that help businesses increase efficiency and scale. Built 10+ live projects with 1000+ users.",
     buttonText: "Download My CV",
-    image: "/images/main_images/Creatix.jpg",
+    image: "/images/main_images/professional-profile.png",
     action: "cv"
   },
   {
@@ -95,7 +95,7 @@ const slides = [
     highlight: "Professional Certifications",
     description: "View my professional certifications and achievements in full-stack development and machine learning.",
     buttonText: "View Certificates",
-    image: "/images/main_images/my-pic.png",
+    image: "/images/main_images/professional-profile.png",
     action: "certification"
   }
 ];
@@ -412,7 +412,7 @@ export default function Page() {
                   }`}
                   onClick={() => {
                     if (slide.action === "cv") {
-                      window.open('/myResume/Saad-Abbasi.pdf', '_blank');
+                      window.open('/myResume/Saad-Abbasi-Resume.pdf', '_blank');
                     } else if (slide.action === "work") {
                       document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
                     } else if (slide.action === "certification") {
