@@ -291,7 +291,7 @@ const mobileProjects: Project[] = [
   }
 ];
 
-const mlProjects = [
+const mlProjects: Project[] = [
   // ── 1. Customer Churn Intelligence (top — end-to-end deployed ML project) ──
   {
     title: "Customer Churn Intelligence",
