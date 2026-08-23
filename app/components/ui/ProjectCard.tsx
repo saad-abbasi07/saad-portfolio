@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { FiGithub, FiZoomIn, FiExternalLink, FiSmartphone, FiLayers } from 'react-icons/fi';
 import { useTheme } from '../../contexts/ThemeContext';
-import ImageLightbox from './ImageLightbox';
+
+const ImageLightbox = dynamic(() => import('./ImageLightbox'), { ssr: false });
 
 export interface ProjectLink {
   label: string;
@@ -80,9 +82,9 @@ export default function ProjectCard({ project, color = "blue", onCaseStudy, spec
               alt={project.title} 
               fill 
               className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 380px"
               loading="lazy"
-              quality={80}
+              quality={75}
               onError={() => setImageError(true)}
             />
           )}

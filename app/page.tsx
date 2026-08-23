@@ -15,19 +15,21 @@ import {
   SiScikitlearn, SiNumpy, SiPandas, SiOpencv
 } from 'react-icons/si';
 import { ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 import SectionHeader from './components/ui/SectionHeader';
 import StatCard from './components/ui/StatCard';
-import ProjectCaseStudy from './components/ui/ProjectCaseStudy';
-import CommandPalette from './components/ui/CommandPalette';
 import ScrollProgress from './components/ui/ScrollProgress';
 import SkillBar from './components/ui/SkillBar';
 import { teamFlowCaseStudy, ecommerceCaseStudy } from './components/data/caseStudies';
 import ProjectCard from './components/ui/ProjectCard';
 import ContactInfo from './components/ui/ContactInfo';
-import CertificateViewer from './components/CertificateViewer';
 import Toast from './components/ui/Toast';
 import StickyNav from './components/ui/StickyNav';
 import { useTheme } from './contexts/ThemeContext';
+
+const ProjectCaseStudy = dynamic(() => import('./components/ui/ProjectCaseStudy'), { ssr: false });
+const CommandPalette = dynamic(() => import('./components/ui/CommandPalette'), { ssr: false });
+const CertificateViewer = dynamic(() => import('./components/CertificateViewer'), { ssr: false });
 
 // --- TYPE DEFINITIONS ---
 interface Slide {
@@ -109,23 +111,9 @@ const slides = [
 ];
 
 const webProjects: Project[] = [
-  // ── 1. Digital Time Capsule ──────────────────────────────────────────────
+  // ── 1. Top Flagship: JobMatch AI (Big Card) ──────────────────────────────
   {
-    title: "Digital Time Capsule",
-    description: "A full-stack web application where users can write messages for their future selves, lock them until a specific date, and return when the capsule unlocks. Features live unlock countdown, create/edit/delete capsules, locked and unlocked states, and MongoDB Atlas persistence.",
-    technologies: ["Next.js", "React", "JavaScript", "MongoDB Atlas", "Mongoose", "Node.js"],
-    github: "https://lnkd.in/dkXgAKFw",
-    image: "/images/projects_images/digital-time-capsule.png",
-    demo: "https://lnkd.in/deaa_4dZ",
-    featured: true,
-    links: [
-      { label: "Live Demo", url: "https://lnkd.in/deaa_4dZ", type: "demo" },
-      { label: "GitHub", url: "https://lnkd.in/dkXgAKFw", type: "github" }
-    ]
-  },
-  // ── 2. JobMatch AI ──────────────────────────────────────────────────────
-  {
-    title: "JobMatch AI — Full Stack Job Application Platform",
+    title: "JobMatch AI - Full Stack Job Application Platform",
     description: "A full-stack AI-powered platform that helps job seekers manage applications and understand how well their CV matches a job. Features CV-to-job matching with match score, missing skills analysis, resume upload and management, user authentication, and an application tracking dashboard.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Appwrite", "Gemini", "Vercel"],
     github: "https://lnkd.in/du2vnFWN",
@@ -137,9 +125,35 @@ const webProjects: Project[] = [
       { label: "GitHub", url: "https://lnkd.in/du2vnFWN", type: "github" }
     ]
   },
-  // ── 3. Job Application Tracker — Web ────────────────────────────────────
+  // ── 2. TeamFlow Collaboration Platform ──────────────────────────────────
   {
-    title: "Job Application Tracker — Full Stack Web",
+    title: "TeamFlow Collaboration Platform",
+    description: "Full-stack collaboration platform with real-time messaging, project tracking, and JWT-secured authentication. Handles 1k+ tasks per workspace with 35% faster load times through optimized React queries and MongoDB indexing.",
+    technologies: ["Next.js", "React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Socket.io"],
+    github: "https://github.com/saad-abbasi07/TeamFlow-Collaboration-Platform",
+    image: "/images/projects_images/team-flow-collaboration-platform.png",
+    demo: "https://team-flow-collaboration-platform.vercel.app/",
+    links: [
+      { label: "Live Demo", url: "https://team-flow-collaboration-platform.vercel.app/", type: "demo" },
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/TeamFlow-Collaboration-Platform", type: "github" }
+    ]
+  },
+  // ── 3. Digital Time Capsule ──────────────────────────────────────────────
+  {
+    title: "Digital Time Capsule",
+    description: "A full-stack web application where users can write messages for their future selves, lock them until a specific date, and return when the capsule unlocks. Features live unlock countdown, create/edit/delete capsules, locked and unlocked states, and MongoDB Atlas persistence.",
+    technologies: ["Next.js", "React", "JavaScript", "MongoDB Atlas", "Mongoose", "Node.js"],
+    github: "https://lnkd.in/dkXgAKFw",
+    image: "/images/projects_images/digital-time-capsule.png",
+    demo: "https://lnkd.in/deaa_4dZ",
+    links: [
+      { label: "Live Demo", url: "https://lnkd.in/deaa_4dZ", type: "demo" },
+      { label: "GitHub", url: "https://lnkd.in/dkXgAKFw", type: "github" }
+    ]
+  },
+  // ── 4. Top Flagship: Job Application Tracker Web (Big Card) ───────────────
+  {
+    title: "Job Application Tracker - Full Stack Web",
     description: "A full-stack job application management platform where users can securely register and log in, manage job applications, track application status, search and filter records, edit application details, and delete applications. Built with React, TypeScript, Vite, and Tailwind CSS. Shares the same Node.js / Express backend and MongoDB Atlas database with the mobile app.",
     architectureNote: "React Web + React Native Mobile → Node.js / Express API → MongoDB Atlas",
     technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Node.js", "Express.js", "MongoDB Atlas", "JWT", "REST API"],
@@ -153,104 +167,146 @@ const webProjects: Project[] = [
       { label: "Backend Repo", url: "https://lnkd.in/dD8_NPV9", type: "backendRepo" }
     ]
   },
-  // ── Existing projects (preserved, order unchanged) ───────────────────────
-  {
-    title: "TeamFlow Collaboration Platform",
-    description: "Full-stack collaboration platform with real-time messaging, project tracking, and JWT-secured authentication. Handles 1k+ tasks per workspace with 35% faster load times through optimized React queries and MongoDB indexing.",
-    technologies: ["Next.js", "React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Socket.io"],
-    github: "https://github.com/saad-abbasi07/TeamFlow-Collaboration-Platform",
-    image: "/images/projects_images/team-flow-collaboration-platform.png",
-    demo: "https://team-flow-collaboration-platform.vercel.app/",
-    featured: true
-  },
-  {
-    title: "React Starter Web",
-    description: "A lightweight starter template for React projects. Includes basic folder structure, pre-configured routing, reusable components, and a ready-to-deploy setup.",
-    technologies: ["React", "Vite", "Tailwind", "React Router"],
-    github: "https://github.com/saad-abbasi07/react-starter-web",
-    image: "/images/projects_images/starter-web.png",
-    demo: "https://react-starter-web.vercel.app/"
-  },
+  // ── 5. Ecommerce Estore NextJS ──────────────────────────────────────────
   {
     title: "Ecommerce Estore NextJS",
     description: "Responsive e-commerce storefront with dynamic product pages and cart functionality. Optimized API response time by 40% using Next.js caching strategies and implemented secure Stripe payment processing.",
     technologies: ["Next.js", "React", "Tailwind"],
     github: "https://github.com/saad-abbasi07/ecommerce-estore-nextjs",
     image: "/images/projects_images/e-store.png",
-    demo: "https://ecommerce-estore-nextjs.vercel.app/"
+    demo: "https://ecommerce-estore-nextjs.vercel.app/",
+    links: [
+      { label: "Live Demo", url: "https://ecommerce-estore-nextjs.vercel.app/", type: "demo" },
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/ecommerce-estore-nextjs", type: "github" }
+    ]
   },
-  {
-    title: "FoodieOrder",
-    description: "React + Tailwind food delivery UI with restaurant listings, menus, cart, and authentication using context-based state management.",
-    technologies: ["React", "Tailwind", "React Router"],
-    github: "https://github.com/saad-abbasi07/FoodieOrder",
-    image: "/images/projects_images/foodieOrder.png",
-    demo: "https://foodie-order-lilac.vercel.app/"
-  },
-  {
-    title: "Weather App",
-    description: "Live weather updates for any city or country using React and Weather API. Implemented search functionality and responsive UI components.",
-    technologies: ["React", "Weather API", "Axios", "Tailwind"],
-    github: "https://github.com/saad-abbasi07/weather-app-react",
-    image: "/images/projects_images/weather-app.png",
-    demo: "https://weather-app-react-pied-three.vercel.app/"
-  },
+  // ── 6. ConnectHub ───────────────────────────────────────────────────────
   {
     title: "ConnectHub",
     description: "Full-stack social platform with real-time messaging and profile management. Reduced database query time by 50% through MongoDB aggregation pipelines and implemented Socket.io for 100ms message delivery.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
     github: "https://github.com/saad-abbasi07/ConnectHub",
     image: "/images/projects_images/connecthub-preview.png",
+    links: [
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/ConnectHub", type: "github" }
+    ]
   },
-  {
-    title: "Shopify Theme",
-    description: "Milano Shopify Theme - Full-stack React/Node solution with responsive UI and demo showcase. Built authentication, responsive layouts, and demo card features using Tailwind CSS and MongoDB.",
-    technologies: ["React", "Node.js", "Express", "Tailwind", "MongoDB"],
-    github: "https://github.com/saad-abbasi07/shopify-theme",
-    image: "/images/projects_images/shopifyTheme.png",
-  },
+  // ── 7. MERN Chat App ────────────────────────────────────────────────────
   {
     title: "MERN Chat App",
     description: "Real-time chat application built with React, Node.js, Express, MongoDB, and Socket.io featuring socket-based messaging and multi-room support.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Socket.io"],
     github: "https://github.com/saad-abbasi07/mern-chat-app",
     image: "/images/projects_images/Mern_live_chat.png",
+    links: [
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/mern-chat-app", type: "github" }
+    ]
   },
+  // ── 8. FoodieOrder ──────────────────────────────────────────────────────
   {
-    title: "Enquiry Form App",
-    description: "Dynamic enquiry form with insert/update table functionality. Integrated backend storage using MongoDB and built interactive table features.",
-    technologies: ["React", "Axios", "Node.js", "MongoDB", "Flowbite"],
-    github: "https://github.com/saad-abbasi07/userEnquiry",
-    image: "/images/projects_images/enquiry-form.png",
+    title: "FoodieOrder",
+    description: "React + Tailwind food delivery UI with restaurant listings, menus, cart, and authentication using context-based state management.",
+    technologies: ["React", "Tailwind", "React Router"],
+    github: "https://github.com/saad-abbasi07/FoodieOrder",
+    image: "/images/projects_images/foodieOrder.png",
+    demo: "https://foodie-order-lilac.vercel.app/",
+    links: [
+      { label: "Live Demo", url: "https://foodie-order-lilac.vercel.app/", type: "demo" },
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/FoodieOrder", type: "github" }
+    ]
   },
+  // ── 9. Shopify Theme ────────────────────────────────────────────────────
+  {
+    title: "Shopify Theme",
+    description: "Milano Shopify Theme - Full-stack React/Node solution with responsive UI and demo showcase. Built authentication, responsive layouts, and demo card features using Tailwind CSS and MongoDB.",
+    technologies: ["React", "Node.js", "Express", "Tailwind", "MongoDB"],
+    github: "https://github.com/saad-abbasi07/shopify-theme",
+    image: "/images/projects_images/shopifyTheme.png",
+    links: [
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/shopify-theme", type: "github" }
+    ]
+  },
+  // ── 10. Weather App ─────────────────────────────────────────────────────
+  {
+    title: "Weather App",
+    description: "Live weather updates for any city or country using React and Weather API. Implemented search functionality and responsive UI components.",
+    technologies: ["React", "Weather API", "Axios", "Tailwind"],
+    github: "https://github.com/saad-abbasi07/weather-app-react",
+    image: "/images/projects_images/weather-app.png",
+    demo: "https://weather-app-react-pied-three.vercel.app/",
+    links: [
+      { label: "Live Demo", url: "https://weather-app-react-pied-three.vercel.app/", type: "demo" },
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/weather-app-react", type: "github" }
+    ]
+  },
+  // ── 11. Live Chat App ───────────────────────────────────────────────────
   {
     title: "Live Chat App",
     description: "Real-time messaging app using React, Firebase, and WebSocket. Implemented message streaming and live notifications.",
     technologies: ["React", "WebSocket", "Firebase", "Tailwind"],
     github: "https://github.com/saad-abbasi07/chat-app",
     image: "/images/projects_images/chat-app.png",
+    links: [
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/chat-app", type: "github" }
+    ]
   },
+  // ── 12. Enquiry Form App ────────────────────────────────────────────────
+  {
+    title: "Enquiry Form App",
+    description: "Dynamic enquiry form with insert/update table functionality. Integrated backend storage using MongoDB and built interactive table features.",
+    technologies: ["React", "Axios", "Node.js", "MongoDB", "Flowbite"],
+    github: "https://github.com/saad-abbasi07/userEnquiry",
+    image: "/images/projects_images/enquiry-form.png",
+    links: [
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/userEnquiry", type: "github" }
+    ]
+  },
+  // ── 13. Strong Password Generator ───────────────────────────────────────
   {
     title: "Strong Password Generator",
     description: "Tool to generate strong 20-character passwords with copy-to-clipboard functionality. Built with React and Tailwind CSS.",
     technologies: ["React", "Tailwind"],
     github: "https://github.com/saad-abbasi07/password-generator-react",
     image: "/images/projects_images/password-generator.png",
+    links: [
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/password-generator-react", type: "github" }
+    ]
   },
-  {
-    title: "University Portal",
-    description: "Secure PHP/MySQL portal with role-specific dashboards, session-based authentication, and Bootstrap UI components.",
-    technologies: ["PHP", "MySQL", "Bootstrap"],
-    github: "https://github.com/saad-abbasi07/university-portal",
-    image: "/images/projects_images/university-portal.png",
-  },
+  // ── 14. fb-mini-app ─────────────────────────────────────────────────────
   {
     title: "fb-mini-app",
     description: "Mini Facebook-like app built with Next.js and TypeScript. Developed modular UI components and navigation.",
     technologies: ["Next.js", "TypeScript"],
     github: "https://github.com/saad-abbasi07/fb-mini-app",
     image: "/images/projects_images/fb-pic.png",
+    links: [
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/fb-mini-app", type: "github" }
+    ]
   },
+  // ── 15. React Starter Web ───────────────────────────────────────────────
+  {
+    title: "React Starter Web",
+    description: "A lightweight starter template for React projects. Includes basic folder structure, pre-configured routing, reusable components, and a ready-to-deploy setup.",
+    technologies: ["React", "Vite", "Tailwind", "React Router"],
+    github: "https://github.com/saad-abbasi07/react-starter-web",
+    image: "/images/projects_images/starter-web.png",
+    demo: "https://react-starter-web.vercel.app/",
+    links: [
+      { label: "Live Demo", url: "https://react-starter-web.vercel.app/", type: "demo" },
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/react-starter-web", type: "github" }
+    ]
+  },
+  // ── 16. University Portal ───────────────────────────────────────────────
+  {
+    title: "University Portal",
+    description: "Secure PHP/MySQL portal with role-specific dashboards, session-based authentication, and Bootstrap UI components.",
+    technologies: ["PHP", "MySQL", "Bootstrap"],
+    github: "https://github.com/saad-abbasi07/university-portal",
+    image: "/images/projects_images/university-portal.png",
+    links: [
+      { label: "GitHub", url: "https://github.com/saad-abbasi07/university-portal", type: "github" }
+    ]
+  }
 ];
 
 const mobileProjects: Project[] = [
@@ -531,12 +587,13 @@ export default function Page() {
             <div className="absolute right-0 top-0 w-full h-full md:w-2/3 lg:w-1/2 overflow-hidden z-0">
                 <Image 
                   src={slide.image} 
-                  alt="Saad" 
+                  alt={slide.title || "Saad Abbasi"} 
                   fill 
                   className="object-cover object-center md:object-right" 
-                  priority
+                  priority={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 60vw, 50vw"
-                  quality={85}
+                  quality={80}
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8A8A"
                 />
@@ -928,7 +985,7 @@ export default function Page() {
               icon={<FiBriefcase className="bg-red-500 text-white"/>} 
               date="Apr. 2026 – May 2026" 
               title="Full Stack Web Developer"
-              sub="Nexelix — Havelian, Pakistan" 
+              sub="Nexelix - Havelian, Pakistan" 
               desc="Built responsive web applications using Next.js, React, and Tailwind CSS. Developed backend APIs using Node.js, Express, TypeScript, and MongoDB. Built full-stack and React Native applications. Integrated AI/ML models into software applications." 
             />
           </div>
@@ -968,7 +1025,6 @@ export default function Page() {
                     project={project} 
                     color="blue" 
                     onCaseStudy={openCaseStudy}
-                    specialWidth={project.title === "Ecommerce Estore NextJS"}
                   />
                 </motion.div>
               ))}
@@ -1167,13 +1223,6 @@ export default function Page() {
         type={toastType}
         isVisible={showToast}
         onClose={() => setShowToast(false)}
-      />
-
-      {/* Certificate Viewer Modal */}
-      <CertificateViewer 
-        isOpen={isCertificateViewerOpen}
-        onClose={() => setIsCertificateViewerOpen(false)}
-        certificates={certificates}
       />
 
       {/* Professional Footer */}

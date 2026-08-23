@@ -76,6 +76,9 @@ const Sidebar = () => {
               src="/images/main_images/professional-profile.png" 
               alt="Saad Abbasi" 
               fill
+              sizes="160px"
+              priority
+              quality={85}
               className="object-cover" 
             />
           </div>

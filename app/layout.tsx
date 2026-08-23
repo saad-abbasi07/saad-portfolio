@@ -5,6 +5,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://saad-portfolio-6xys.vercel.app'),
   title: 'Saad Abbasi - Full Stack Developer & Machine Learning Engineer',
   description: 'Portfolio of Saad Abbasi - Full Stack Developer specializing in React, Next.js, Node.js, and Machine Learning. Building modern web applications and AI solutions.',
   keywords: ['Full Stack Developer', 'Machine Learning', 'React', 'Next.js', 'Node.js', 'Python', 'TypeScript', 'Portfolio'],
@@ -55,19 +56,19 @@ const quicksand = Quicksand({
   subsets: ['latin'],
   weight: ['300', '400', '500', '700'],
   variable: '--font-quicksand',
+  display: 'swap',
 });
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
   variable: '--font-playfair',
+  display: 'swap',
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${quicksand.variable} ${playfair.variable} scroll-smooth`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="theme-color" content="#A855F7" />
         <meta name="msapplication-TileColor" content="#A855F7" />
         <meta name="format-detection" content="telephone=no" />
