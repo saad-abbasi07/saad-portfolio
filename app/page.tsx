@@ -572,7 +572,7 @@ export default function Page() {
                   }`}
                   onClick={() => {
                     if (slide.action === "cv") {
-                      window.open('/myResume/Saad_s_Resume.pdf', '_blank');
+                      window.open('/myResume/Saad_Abbasi__Resume.pdf', '_blank');
                     } else if (slide.action === "work") {
                       document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
                     } else if (slide.action === "certification") {

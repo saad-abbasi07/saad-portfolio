@@ -55,7 +55,7 @@ export default function Hero({ slides }: HeroProps) {
                 }`}
                 onClick={() => {
                   if (slide.buttonText === "Download CV" || slide.buttonText === "Download My CV") {
-                    window.open('/myResume/Saad_s_Resume.pdf', '_blank');
+                    window.open('/myResume/Saad_Abbasi__Resume.pdf', '_blank');
                   } else {
                     document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
                   }
