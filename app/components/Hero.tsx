@@ -47,22 +47,24 @@ export default function Hero({ slides }: HeroProps) {
               <p className={`text-[15px] md:text-[16px] leading-relaxed text-gray-400 mb-8 border-l-4 border-primary pl-4 max-w-md ${
                 theme === 'dark' ? 'text-gray-300' : 'text-gray-500'
               }`}>{slide.description}</p>
-              <button 
-                className={`px-10 py-4 uppercase tracking-widest text-[11px] font-bold transition-all duration-200 shadow-lg hover:scale-105 active:scale-95 ${
-                  theme === 'dark' 
-                    ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                    : 'bg-primary text-primary-foreground hover:bg-primary/90'
-                }`}
-                onClick={() => {
-                  if (slide.buttonText === "Download CV" || slide.buttonText === "Download My CV") {
-                    window.open('/myResume/Saad_Abbasi__Resume.pdf', '_blank');
-                  } else {
+              {slide.buttonText === "Download CV" || slide.buttonText === "Download My CV" ? (
+                <a
+                  href="/myResume/Saad_Abbasi_CV.pdf"
+                  download="Saad_Abbasi_CV.pdf"
+                  className={`inline-flex items-center justify-center px-10 py-4 uppercase tracking-widest text-[11px] font-bold transition-all duration-200 shadow-lg hover:scale-105 active:scale-95 bg-primary text-primary-foreground hover:bg-primary/90`}
+                >
+                  {slide.buttonText}
+                </a>
+              ) : (
+                <button 
+                  className={`px-10 py-4 uppercase tracking-widest text-[11px] font-bold transition-all duration-200 shadow-lg hover:scale-105 active:scale-95 bg-primary text-primary-foreground hover:bg-primary/90`}
+                  onClick={() => {
                     document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                {slide.buttonText}
-              </button>
+                  }}
+                >
+                  {slide.buttonText}
+                </button>
+              )}
             </div>
           </div>
           <div className="absolute right-0 top-0 w-full h-full md:w-2/3 lg:w-1/2 overflow-hidden z-0">

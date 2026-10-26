@@ -566,22 +566,32 @@ export default function Page() {
                 <p className={`text-[13px] sm:text-[15px] md:text-[16px] leading-relaxed mb-8 sm:mb-10 border-l-4 border-[#A855F7] pl-4 sm:pl-6 max-w-lg font-medium ${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
                 }`}>{slide.description}</p>
-                <button 
-                  className={`w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 uppercase tracking-widest text-[10px] sm:text-[11px] font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[44px] sm:min-h-[48px] bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 ${
-                    theme === 'dark' ? 'shadow-purple-500/25' : 'shadow-purple-500/20'
-                  }`}
-                  onClick={() => {
-                    if (slide.action === "cv") {
-                      window.open('/myResume/Saad_Abbasi__Resume.pdf', '_blank');
-                    } else if (slide.action === "work") {
-                      document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
-                    } else if (slide.action === "certification") {
-                      setIsCertificateViewerOpen(true);
-                    }
-                  }}
-                >
-                  {slide.buttonText}
-                </button>
+                {slide.action === "cv" ? (
+                  <a
+                    href="/myResume/Saad_Abbasi_CV.pdf"
+                    download="Saad_Abbasi_CV.pdf"
+                    className={`inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 uppercase tracking-widest text-[10px] sm:text-[11px] font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[44px] sm:min-h-[48px] bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 ${
+                      theme === 'dark' ? 'shadow-purple-500/25' : 'shadow-purple-500/20'
+                    }`}
+                  >
+                    {slide.buttonText}
+                  </a>
+                ) : (
+                  <button 
+                    className={`w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 uppercase tracking-widest text-[10px] sm:text-[11px] font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 min-h-[44px] sm:min-h-[48px] bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 ${
+                      theme === 'dark' ? 'shadow-purple-500/25' : 'shadow-purple-500/20'
+                    }`}
+                    onClick={() => {
+                      if (slide.action === "work") {
+                        document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
+                      } else if (slide.action === "certification") {
+                        setIsCertificateViewerOpen(true);
+                      }
+                    }}
+                  >
+                    {slide.buttonText}
+                  </button>
+                )}
               </div>
             </div>
             <div className="absolute right-0 top-0 w-full h-full md:w-2/3 lg:w-1/2 overflow-hidden z-0">

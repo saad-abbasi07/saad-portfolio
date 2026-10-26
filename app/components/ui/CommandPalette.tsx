@@ -123,7 +123,12 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
       description: 'Download resume PDF',
       icon: <FiDownload />,
       action: () => {
-        window.open('/myResume/Saad_Abbasi__Resume.pdf', '_blank');
+        const link = document.createElement('a');
+        link.href = '/myResume/Saad_Abbasi_CV.pdf';
+        link.download = 'Saad_Abbasi_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
         onClose();
       },
       category: 'actions',
